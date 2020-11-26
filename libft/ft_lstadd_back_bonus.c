@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 13:58:52 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 18:19:11 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/10/23 17:14:26 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-#include <stdio.h>
-#include "utils.h"
-#include "struct.h"
-#include "../libft/libft.h"
+void	ft_lstadd_back(t_list **alst, t_list *new)
+{
+	t_list *tmp;
 
-char *ft_getenv(char **env, char *name);
-void    treat_line(char *line);
-
-
-char    *g_line;
-t_cmd   g_cmd;
-
-#endif
+	tmp = *alst;
+	if (tmp)
+	{
+		tmp = ft_lstlast(tmp);
+		tmp->next = new;
+	}
+	else
+		*alst = new;
+}

@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 13:58:52 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 16:02:58 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/10/23 16:48:27 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include <stdlib.h>
 
-#include <stdio.h>
-#include "utils.h"
-#include "struct.h"
-#include "../libft/libft.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-char *ft_getenv(char **env, char *name);
-void    treat_line(char *line);
-
-
-char    *g_line;
-t_cmd   g_cmd;
-
-#endif
+	if (!(new = malloc(sizeof(t_list))))
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}

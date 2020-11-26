@@ -6,11 +6,12 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:16 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/25 14:23:33 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:11:00 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
+#include "../../libft/libft.h"
 
 char	*ft_checkerror(int fd, char **buff)
 {

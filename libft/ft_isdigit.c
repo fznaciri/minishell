@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/25 14:23:48 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/25 14:23:55 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/09 15:00:06 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/10/20 19:32:07 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
-
-char	*ft_strchr(const char *s, int c)
+int		ft_isdigit(int c)
 {
-	char *str;
-
-	str = (char*)s;
-	if (!s)
-		return (NULL);
-	if (!c)
-		return (str + ft_strlen(s));
-	while (*str)
-	{
-		if (*str == c)
-			return (str);
-		str++;
-	}
-	return (NULL);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }

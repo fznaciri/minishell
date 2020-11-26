@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 13:58:52 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/12 13:16:30 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/10/23 19:47:27 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include <stdlib.h>
 
-#include <stdio.h>
-#include "utils.h"
-#include "struct.h"
-#include "../libft/libft.h"
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*s;
+	size_t	i;
 
-char *ft_getenv(char **env, char *name);
-void    treat_line(char *line);
-
-
-char    *g_line;
-t_cmd   g_cmd;
-
-#endif
+	i = count * size;
+	if (!(s = malloc(i)))
+		return (NULL);
+	return (ft_memset(s, 0, i));
+}

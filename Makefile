@@ -6,7 +6,7 @@
 #    By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 13:59:20 by fnaciri-          #+#    #+#              #
-#    Updated: 2020/11/26 11:02:53 by fnaciri-         ###   ########.fr        #
+#    Updated: 2020/11/26 14:09:42 by fnaciri-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,22 @@ SRC =  ./src/*.c ./src/*/*.c
 all: $(NAME)
 
 $(NAME):
-	@$(C) -g -o $(NAME) main.c $(SRC)
+	@make -C libft
+	@$(CC)  -g  main.c -L ./libft -lft $(SRC) -o $(NAME)
 
 run:
 	@./$(NAME)
+
 debug:
-	@$(C) $(FLAGS) -o $(NAME) main.c $(SRC) -fsanitize=address
+	@$(CC)  -g  main.c -L ./libft -lft $(SRC) -o $(NAME) -fsanitize=address
 
 clean:
 	@rm -f $(NAME)
+	@make -C libft clean
 
 fclean: clean
-
+	@make -C libft fclean
+	
 re: fclean all
 
 .PHONY: re fclean clean all

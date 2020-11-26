@@ -6,12 +6,12 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 10:36:26 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 13:06:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:17:50 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
-
+#include "libft.h"
+#include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

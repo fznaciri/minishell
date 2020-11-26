@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/06 10:11:44 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/09 09:33:28 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 21:30:03 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/12/26 11:25:51 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int		i;
-	char	*str;
+	t_list	*tmp;
 
-	i = 0;
-	if (!(str = (char*)malloc((ft_strlen(s1) * sizeof(char)) + 1)))
-		return (NULL);
-	while (s1[i] != '\0')
+	tmp = lst;
+	if (lst && f)
 	{
-		str[i] = s1[i];
-		i++;
+		while (tmp)
+		{
+			f(tmp->content);
+			tmp = tmp->next;
+		}
 	}
-	str[i] = s1[i];
-	return (str);
 }

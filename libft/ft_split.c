@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 10:31:18 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 12:05:29 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/16 19:11:41 by fnaciri-          #+#    #+#             */
+/*   Updated: 2019/10/24 20:45:07 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "libft.h"
+#include <stdlib.h>
 
 static int		ft_countword(char const *s, char c)
 {

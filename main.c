@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 13:12:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/11/26 19:16:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,34 @@
 
 void  prompt(void)
 {
-    printf("\033[31;1m$>\033[0m");
+    // printf("\033[31;1m$>\033[0m");
 }
 
 int main(int ac, char **av, char **env)
 {
     
     char *s;
-    int i;
+    
+    int status;
 
-    i = 0;
-    s = ft_getenv(env, "PWD");
-    printf("\033[31;1m-> %s\033[0m", s);
-    prompt();
-    gnl(0, &g_line);
-    // treat_line(g_line);
-    // free(g_line);
+    
+   
+    status = 1;
+    while (status)
+    {
+        s = ft_getenv(env, "PWD");
+        write(1, "\033[0;31m", 8);
+        write(1," ->", 3);
+        write(1, s, strlen(s));
+        write(1, "$> ", 3);
+        write(1, "\033[0m", 5);
+        gnl(0, &g_line);
+        printf("%s\n", g_line);
+        treat_line(g_line);
+        free(g_line);
+    }
+    
+    
+    
     return(0);
 }
