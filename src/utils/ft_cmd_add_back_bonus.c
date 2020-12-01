@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_cmd_add_back_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 10:28:33 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 18:19:11 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/01 10:30:54 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../include/utils.h"
 
-typedef struct s_cmd
+void	ft_cmd_add_back(t_cmd **alst, t_cmd *new)
 {
-    char *cmd;
-    char **arg;
-    char *op;
-    struct s_cmd *next;
-    struct s_cmd *prev;
-    
-} t_cmd;
+	t_cmd *tmp;
 
-t_cmd   *g_cmd;
-#endif
+	tmp = *alst;
+	if (tmp)
+	{
+		tmp = ft_cmd_last(tmp);
+		tmp->next = new;
+	}
+	else
+		*alst = new;
+}

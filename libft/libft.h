@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 15:49:55 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 18:19:17 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/01 10:20:24 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <string.h>
 
-typedef	struct		s_list
+typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+	void	*content;
+	struct s_list *next;
+}	t_list;
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);

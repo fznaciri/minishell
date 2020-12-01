@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_cmd_last_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 10:28:33 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 17:20:00 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/01 10:30:03 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../include/utils.h"
 
-typedef struct s_cmd
+t_cmd		*ft_cmd_last(t_cmd *lst)
 {
-    char *cmd;
-    char **arg;
-    char *op;
-    struct s_cmd *next;
-    struct s_cmd *prev;
-    
-} t_cmd;
-
-t_cmd   *g_cmd;
-#endif
+	if (lst)
+	{
+		while (lst->next)
+			lst = lst->next;
+	}
+	return (lst);
+}

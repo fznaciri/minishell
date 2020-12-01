@@ -6,30 +6,26 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 19:16:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/01 14:08:23 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-void  prompt(void)
-{
-    // printf("\033[31;1m$>\033[0m");
-}
-
 int main(int ac, char **av, char **env)
 {
     
     char *s;
-    
+    int i = 0;
     int status;
-
     
-   
-    status = 1;
+    status = 1; 
+    init_env(env);
+    // s = get_path("grep");
+    // printf(" ping_path: %s\n", s);
     while (status)
     {
-        s = ft_getenv(env, "PWD");
+        s = ft_getenv("PWD");
         write(1, "\033[0;31m", 8);
         write(1," ->", 3);
         write(1, s, strlen(s));
@@ -38,10 +34,8 @@ int main(int ac, char **av, char **env)
         gnl(0, &g_line);
         printf("%s\n", g_line);
         treat_line(g_line);
+        // print_cmd(g_cmd);
         free(g_line);
     }
-    
-    
-    
     return(0);
 }

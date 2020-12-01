@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_cmd_new_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 10:28:33 by fnaciri-         ###   ########.fr       */
+/*   Created: 2019/10/17 16:02:58 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/01 10:30:26 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../include/utils.h"
+#include <stdlib.h>
 
-typedef struct s_cmd
+t_cmd	*ft_cmd_new(void *cmd, char **arg, char *op)
 {
-    char *cmd;
-    char **arg;
-    char *op;
-    struct s_cmd *next;
-    struct s_cmd *prev;
-    
-} t_cmd;
+	t_cmd	*new;
 
-t_cmd   *g_cmd;
-#endif
+	if (!(new = malloc(sizeof(t_cmd))))
+		return (NULL);
+	new->cmd = cmd;
+    new->arg = arg;
+    new->op = op;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
