@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 14:49:13 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:07:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,24 @@ void    treat_line(char *line)
     pipeline = ft_split_cmd(line);
     while (pipeline[i])
     {   
-        printf("%s\n", pipeline[i]);
         s = ft_split(pipeline[i], ' ');
         cmd = ft_cmd_new(get_path(s[0]), s, opr(pipeline[i]));
+        if (cmd->op)
+            cmd->arg = remove_last_arg(cmd->arg);
         ft_cmd_add_back(&g_cmd, cmd);
         i++;
     } 
+}
+
+char    **remove_last_arg(char **s)
+{
+    int i;
+
+    i = 0;
+    while (s[i])
+        i++;
+    s[i - 1] = NULL;
+    return (s);
 }
 
 char    *opr(char *s)
@@ -45,30 +57,6 @@ char    *opr(char *s)
     return NULL;
 }
 
-char    *get_path(char *s)
-{
-    struct stat buf;
-    char **path;
-    char *tmp;
-    char *f_path;
-    int i;
-
-    i = 0;
-    path = ft_split(ft_getenv("PATH"), ':');
-    while (path[i])
-    {
-        f_path = ft_strjoin(path[i], "/");
-        tmp = f_path;
-        f_path = ft_strjoin(tmp, s);
-        free(tmp);
-        if (!stat(f_path, &buf))
-            return f_path;
-        free(f_path);
-        i++;
-    }
-    return NULL;
-}
-
 void print_arg(char **arg)
 {
     int i;
@@ -77,7 +65,7 @@ void print_arg(char **arg)
     while(arg[i])
     {
         if (strcmp(arg[i], "|") && strcmp(arg[i], ";"))
-             printf("%s\n", arg[i]);
+             printf("arg[%d] %s\n",i, arg[i]);
         i++;
     }
 }

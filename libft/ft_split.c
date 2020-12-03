@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:11:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2019/10/24 20:45:07 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:39:17 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static int		ft_countword(char const *s, char c)
 		wc = 1;
 	while (str[i])
 	{
+		if (str[i] == 34 || str[i] == 39)
+        {
+            i++;
+            while (str[i] != 34 && str[i] != 39)
+                i++;
+        }
 		if (str[i] == c && str[i + 1] != c && str[i + 1] != '\0')
 			wc++;
 		i++;
@@ -40,6 +46,16 @@ static	size_t	ft_wordlen(char *s, int i, char c)
 	j = 0;
 	while (s[i] != c && s[i])
 	{
+		if (s[i] == 34 || s[i] == 39)
+        {
+            i++;
+            while (s[i] != 34 && s[i] != 39)
+            {
+				i++;
+				j++;
+			}
+			j++;
+        }
 		i++;
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 14:46:57 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:09:15 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(int ac, char **av, char **env)
     
     status = 1; 
     init_env(env);
+    // s = get_path("ls");
+    // printf("%s\n", s);
     while (status)
     {
         s = ft_getenv("PWD");
@@ -33,6 +35,8 @@ int main(int ac, char **av, char **env)
         printf("%s\n", g_line);
         treat_line(g_line);
         print_cmd(g_cmd);
+        cmd_env();
+        cmd_exit();
         free(g_line);
     }
     return(0);
