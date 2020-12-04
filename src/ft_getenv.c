@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:14:23 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 13:29:12 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/04 18:11:37 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,15 @@ char *ft_getenv(char *name)
 
 void    init_env(char **env)
 {
-    g_env = env;
+    int n;
+    int i;
+
+    i = 0;
+    n = arg_num(env);
+    g_env = malloc(sizeof(char *) * n + 1);
+    while (env[i])
+    {
+        g_env[i] = ft_strdup(env[i]);
+        i++;
+    }
 }

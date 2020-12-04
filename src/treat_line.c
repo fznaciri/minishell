@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 11:07:10 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/03 18:30:22 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,15 @@ char    **remove_last_arg(char **s)
     return (s);
 }
 
+int     arg_num(char **arg)
+{
+    int i;
+
+    i = 0;
+    while (arg[i])
+        i++;
+    return (i);
+}
 char    *opr(char *s)
 {
     int i;

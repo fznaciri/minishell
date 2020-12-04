@@ -6,13 +6,13 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 14:04:31 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 14:07:49 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/03 18:38:57 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    cmd_exit()
+int    cmd_exit()
 {
     exit(0);
 }

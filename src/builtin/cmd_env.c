@@ -6,13 +6,13 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:56:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 13:59:55 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/03 18:24:38 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void cmd_env()
+int cmd_env()
 {
     int i;
 
@@ -23,4 +23,5 @@ void cmd_env()
         write(1, "\n", 1);
         i++;
     }
+    return(0);
 }
