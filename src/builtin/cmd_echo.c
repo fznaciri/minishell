@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:12:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 11:07:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/05 14:39:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,26 @@
 
 int		cmd_echo()
 {
-	char	*s;
+	int i;
 	int		n;
 
 	n = 0;
-	if (!ft_strncmp(g_cmd->arg[1], "-n", 2))
-	{
-		n = 1;
-		s = g_cmd->arg[2];
-        skip_spaces(&s);
-	}
-    ft_putstr_fd(s, 1);
+	if (g_cmd->arg[1])
+		if (!ft_strncmp(g_cmd->arg[1], "-n", 2))
+			n = 1;
+	// if (n)
+	// {
+		i = 1;
+		while (g_cmd->arg[i + n])
+		{
+			ft_putstr_fd(g_cmd->arg[i + n], 1);
+			if (g_cmd->arg[i + n + 1])
+				write(1, " ", 1);
+			i++;
+		}
+	// }
+	// else
+    // 	print_arg(g_cmd->arg + 1);
 	if (!n)
         write(1, "\n", 1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 18:31:49 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/05 11:18:44 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		cmd_echo();
 int  cmd_pwd();
 int cmd_env();
 int    cmd_exit();
+void    add_env(char *s);
+void    replace_env(char *s);
 
 char **g_env;
 #endif
