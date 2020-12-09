@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/03 18:30:22 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/08 20:17:35 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,28 @@ void    treat_line(char *line)
     while (pipeline[i])
     {   
         s = ft_split(pipeline[i], ' ');
+        s = ft_argtrim(s, "\"'");
         cmd = ft_cmd_new(get_path(s[0]), s, opr(pipeline[i]));
         if (cmd->op)
             cmd->arg = remove_last_arg(cmd->arg);
         ft_cmd_add_back(&g_cmd, cmd);
         i++;
     } 
+}
+
+char    **ft_argtrim(char **arg, char *set)
+{
+    int i;
+    char *tmp;
+    i = 0;
+    while (arg[i])
+    {
+        tmp = arg[i];
+        arg[i] = ft_strtrim(arg[i], set);
+        free(tmp);
+        i++;
+    }
+    return arg;
 }
 
 char    **remove_last_arg(char **s)
@@ -74,7 +90,7 @@ void print_arg(char **arg)
     while(arg[i])
     {
         if (strcmp(arg[i], "|") && strcmp(arg[i], ";"))
-             printf("arg[%d] %s\n",i, arg[i]);
+             printf("arg[%d] |%s|\n",i, arg[i]);
         i++;
     }
 }
@@ -88,7 +104,7 @@ void    print_cmd(t_cmd *cmd)
 	{
 		printf("cmd %s\n", tmp->cmd);
         print_arg(tmp->arg);
-        printf("opr %s\n", tmp->op);
+        printf("opr |%s|\n", tmp->op);
 		tmp = tmp->next;
 	}
 }

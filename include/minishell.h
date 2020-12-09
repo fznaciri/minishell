@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/05 11:18:44 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/09 12:22:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 #include <sys/types.h>
 #include <time.h>
 
+# define BUILTINS_NUM 7
+
+int (*builtins[BUILTINS_NUM])(char **);
+char *builtins_str[BUILTINS_NUM];
+
 char    *ft_getenv(char *name);
 void    treat_line(char *line);
 void    print_cmd(t_cmd *cmd);
@@ -34,13 +39,19 @@ int is_space(char c);
 void    skip_spaces(char **s);
 int     arg_num(char **arg);
 // builtins
-int    cmd_cd();
-int		cmd_echo();
-int  cmd_pwd();
-int cmd_env();
-int    cmd_exit();
+void    init_builtins();
+int    execute_builtins();
+int    cmd_cd(char **arg);
+int		cmd_echo(char **arg);
+int  cmd_pwd(char **arg);
+int cmd_env(char **arg);
+int   cmd_export(char **arg);
+int   cmd_unset(char **arg);
+int    cmd_exit(char **arg);
 void    add_env(char *s);
 void    replace_env(char *s);
+char    **ft_argtrim(char **arg, char *set);
+void    remove_env(char *s);
 
 char **g_env;
 #endif

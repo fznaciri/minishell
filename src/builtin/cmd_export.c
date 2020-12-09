@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 13:56:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 12:28:20 by fnaciri-         ###   ########.fr       */
+/*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/09 12:28:49 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int cmd_env(char **arg)
+int   cmd_export(char **arg)
 {
-    int i;
+    char *pwd;
 
-    i = 0;
-    while(g_env[i])
-    {
-        ft_putstr_fd(g_env[i], 1);
-        write(1, "\n", 1);
-        i++;
-    }
-    return(0);
+    return (0);    
 }

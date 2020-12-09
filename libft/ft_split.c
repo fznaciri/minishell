@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 19:11:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 18:39:17 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/08 19:01:44 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	size_t	ft_wordlen(char *s, int i, char c)
 	j = 0;
 	while (s[i] != c && s[i])
 	{
-		if (s[i] == 34 || s[i] == 39)
+		if (s[i] ==  34|| s[i] == 39)
         {
             i++;
             while (s[i] != 34 && s[i] != 39)

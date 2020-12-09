@@ -6,13 +6,13 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:14:48 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/04 18:14:07 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/09 12:28:09 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int   cmd_cd()
+int   cmd_cd(char **arg)
 {
     char *pwd;
 
