@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 12:22:10 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/09 14:10:00 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void    skip_spaces(char **s);
 int     arg_num(char **arg);
 // builtins
 void    init_builtins();
+int     is_builtins(char *s);
 int    execute_builtins();
 int    cmd_cd(char **arg);
 int		cmd_echo(char **arg);
