@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 14:10:00 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/10 14:20:27 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int   cmd_export(char **arg);
 int   cmd_unset(char **arg);
 int    cmd_exit(char **arg);
 void    add_env(char *s);
+char  *extract_env(char *s);
 void    replace_env(char *s);
 char    **ft_argtrim(char **arg, char *set);
 void    remove_env(char *s);

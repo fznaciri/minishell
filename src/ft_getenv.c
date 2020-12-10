@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:14:23 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 13:44:41 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/10 14:32:58 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,35 @@ void    add_env(char *s)
 void    replace_env(char *s)
 {
     int i;
-    int j;
+    // int j;
     char *str;
     
     i = 0;
+    // j = 0;
+    // str = s;
+    // while (s[j])
+    // {
+    //     if (s[j] == '=')
+    //          break ;
+    //     j++;
+    // }
+    // str = ft_substr(str, 0, j + 1);
+    str = extract_env(s);
+    while (g_env[i])
+    {
+        if (ft_strncmp(g_env[i], str, ft_strlen(str)) == 0)
+        {
+            g_env[i] = ft_strdup(s);
+        }
+        i++;
+    }
+}
+
+char  *extract_env(char *s)
+{
+    int j;
+    char *str;
+    
     j = 0;
     str = s;
     while (s[j])
@@ -84,14 +109,7 @@ void    replace_env(char *s)
         j++;
     }
     str = ft_substr(str, 0, j + 1);
-    while (g_env[i])
-    {
-        if (ft_strncmp(g_env[i], str, ft_strlen(str)) == 0)
-        {
-            g_env[i] = ft_strdup(s);
-        }
-        i++;
-    }
+    return (str);
 }
 
 void    remove_env(char *s)
