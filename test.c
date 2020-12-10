@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 10:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/30 12:49:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/10 20:30:15 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
-#include <sys/types.h>
-
+#include <sys/wait.h>
 
 //  ping -c 4 "google.com" | grep "rpu"  ping: /sbin/ping  grep: /usr/bin/grep
 // ps aux | grep root | grep /usr/sbin stdin -> wp| rd ->

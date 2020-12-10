@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:14:23 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 14:32:58 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/10 18:18:01 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,86 +50,4 @@ void    init_env(char **env)
         i++;
     }
     g_env[i] = NULL;
-}
-
-void    add_env(char *s)
-{
-    int n;
-    int i;
-    char **env;
-
-    i = 0;
-    n = arg_num(g_env);
-    env = malloc(sizeof(char *) * n + 2);
-    ft_memcpy(env, g_env, n * sizeof(char*));
-    env[n] = ft_strdup(s);
-    env[n + 1] = NULL;
-    free(g_env);
-    g_env = env;    
-}
-
-void    replace_env(char *s)
-{
-    int i;
-    // int j;
-    char *str;
-    
-    i = 0;
-    // j = 0;
-    // str = s;
-    // while (s[j])
-    // {
-    //     if (s[j] == '=')
-    //          break ;
-    //     j++;
-    // }
-    // str = ft_substr(str, 0, j + 1);
-    str = extract_env(s);
-    while (g_env[i])
-    {
-        if (ft_strncmp(g_env[i], str, ft_strlen(str)) == 0)
-        {
-            g_env[i] = ft_strdup(s);
-        }
-        i++;
-    }
-}
-
-char  *extract_env(char *s)
-{
-    int j;
-    char *str;
-    
-    j = 0;
-    str = s;
-    while (s[j])
-    {
-        if (s[j] == '=')
-             break ;
-        j++;
-    }
-    str = ft_substr(str, 0, j + 1);
-    return (str);
-}
-
-void    remove_env(char *s)
-{
-    int i;
-    int j;
-    
-    i = 0;
-    while (g_env[i])
-    {
-        if (ft_strncmp(g_env[i], s, ft_strlen(s)) == 0)
-        {
-            j = 0;
-            free(g_env[i]);
-            while (g_env[i + j])
-            {
-                g_env[i + j] = g_env[i + j + 1];
-                j++;
-            }
-        }
-        i++;
-    }
 }

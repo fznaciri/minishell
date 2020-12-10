@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 14:20:27 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/10 20:54:13 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 #include "../libft/libft.h"
 #include <unistd.h>
 #include <sys/stat.h>
-#include <sys/types.h>
+#include <sys/wait.h>
 #include <time.h>
+#include <errno.h>
+#include <stdlib.h>
 
 # define BUILTINS_NUM 7
 
@@ -54,6 +56,9 @@ char  *extract_env(char *s);
 void    replace_env(char *s);
 char    **ft_argtrim(char **arg, char *set);
 void    remove_env(char *s);
+int exec(t_cmd cmd);
+int     execute(t_cmd *cmd);
 
 char **g_env;
+int g_status;
 #endif
