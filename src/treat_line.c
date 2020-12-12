@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/08 20:17:35 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/12 14:55:14 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,25 @@ void    treat_line(char *line)
     char **pipeline;
     char **s;
     t_cmd *cmd;
-
+    char *op;
+    
     i = 0;
-    pipeline = ft_split_cmd(line);
+    pipeline = ft_splitt(line, "|;");
+    pipeline = ft_argtrim(pipeline, " "); // p[0] = echo tet>f1>f2 ; p[1] = pwd > f2
+    print_arg(pipeline);
     while (pipeline[i])
-    {   
-        s = ft_split(pipeline[i], ' ');
+    {
+        s = ft_splitt(pipeline[i], "><>>"); // s[0]= echo tet> >s[1] = f1 > s[2] = f2;
+        s = ft_splitt(pipeline[i], "  ");
+        op = opr(pipeline[i]);
+        if (op)
+            s = remove_arg(s, op);
         s = ft_argtrim(s, "\"'");
-        cmd = ft_cmd_new(get_path(s[0]), s, opr(pipeline[i]));
-        if (cmd->op)
-            cmd->arg = remove_last_arg(cmd->arg);
+        cmd = ft_cmd_new(get_path(s[0]), s, op);
         ft_cmd_add_back(&g_cmd, cmd);
         i++;
-    } 
+    }
+    
 }
 
 char    **ft_argtrim(char **arg, char *set)
@@ -49,15 +55,28 @@ char    **ft_argtrim(char **arg, char *set)
     return arg;
 }
 
-char    **remove_last_arg(char **s)
+char    **remove_arg(char **arg, char *s)
 {
     int i;
-
+    int l;
+    
     i = 0;
-    while (s[i])
+    while (arg[i])
+    {
+        if (!ft_strncmp(arg[i], s, ft_strlen(s)))
+        {
+            free(arg[i]);
+            arg[i] = NULL;
+            return (arg);
+        }
         i++;
-    s[i - 1] = NULL;
-    return (s);
+    }
+    if (ft_strchr(arg[i - 1], '|') || ft_strchr(arg[i - 1], ';'))
+    {
+        l = ft_strlen(arg[i - 1]);
+        arg[i - 1][l - 1] = 0;
+    }
+    return (arg);
 }
 
 int     arg_num(char **arg)

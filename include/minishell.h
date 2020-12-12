@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 20:54:13 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/11 20:24:32 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void print_arg(char **arg);
 char    *opr(char *s);
 char    *get_path(char *s);
 void    init_env(char **env);
-char    **remove_last_arg(char **s);
+char    **remove_arg(char **arg, char *s);
 int is_space(char c);
 void    skip_spaces(char **s);
 int     arg_num(char **arg);

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 20:54:28 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/11 14:00:46 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int main(int ac, char **av, char **env)
         write(1, "$> ", 3);
         write(1, "\033[0m", 5);
         gnl(0, &g_line);
-        // printf("%s\n", g_line);
+        printf("%s\n", g_line);
         treat_line(g_line);
-        // print_cmd(g_cmd);
-        execute(g_cmd);
+        print_cmd(g_cmd);
+        g_status = execute(g_cmd);
         g_cmd = g_cmd->next;
+        ft_cmd_clear(&g_cmd);
         free(g_line);
     }
     return(0);

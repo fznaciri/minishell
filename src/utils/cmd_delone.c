@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   cmd_delone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/11 11:23:13 by fnaciri-         ###   ########.fr       */
+/*   Created: 2020/12/11 13:28:09 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/11 14:00:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../include/utils.h"
 
-// typedef struct s_sh
-// {
-//     char    **g_env;
-//     int     status;
-    
-// } t_sh;
-
-typedef struct s_cmd
+void	ft_cmd_delone(t_cmd *cmd)
 {
-    char *cmd;
-    char **arg;
-    char *op;
-    struct s_cmd *next;
-    struct s_cmd *prev;
-    
-} t_cmd;
+	if (cmd)
+	{
+		if (cmd->cmd)
+			free(cmd->cmd);
+		if (cmd->arg)
+			free(cmd->arg);
+		free(cmd);
+    	cmd = NULL;	
+	}
+}
 
-t_cmd   *g_cmd;
-#endif
+void    ft_cmd_clear(t_cmd **cmd)
+{
+    t_cmd *tmp;
+
+    tmp = *cmd;
+    while (tmp)
+    {
+        ft_cmd_delone(tmp);
+        tmp = tmp->next;
+    }
+    *cmd = NULL;
+}
