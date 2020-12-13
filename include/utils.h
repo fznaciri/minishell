@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:21 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 11:03:45 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:29:02 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,8 @@ void	ft_red_add_back(t_red **red, t_red *new);
 t_red		*ft_red_last(t_red *lst);
 t_red	*ft_red_new(void *red_type, char *file);
 char *ft_strndup(const char *s1, size_t n);
+
+int     ft_strnchrn(char *s, char *set);
+int     ft_strchrn(char *s, char c);
+int     ft_tab_min(int tab[], int i);
 #endif
