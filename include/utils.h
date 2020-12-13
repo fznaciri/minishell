@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:21 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/12 09:33:03 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/13 11:03:45 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 #include <stdio.h>
 #include "struct.h"
+#include "../libft/libft.h"
 # define BUFFER_SIZE 32
 
 char    *g_line;
@@ -29,5 +30,9 @@ t_cmd				*ft_cmd_last(t_cmd *lst);
 void				ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void                ft_cmd_delone(t_cmd *cmd);
 void                ft_cmd_clear(t_cmd **cmd);
-
+t_red               *ft_red_new(void *red_type, char *file);
+void	ft_red_add_back(t_red **red, t_red *new);
+t_red		*ft_red_last(t_red *lst);
+t_red	*ft_red_new(void *red_type, char *file);
+char *ft_strndup(const char *s1, size_t n);
 #endif

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/12 14:55:14 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/13 10:54:43 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,23 @@ void    treat_line(char *line)
     char **pipeline;
     char **s;
     t_cmd *cmd;
+    t_red *red;
     char *op;
     
     i = 0;
     pipeline = ft_splitt(line, "|;");
-    pipeline = ft_argtrim(pipeline, " "); // p[0] = echo tet>f1>f2 ; p[1] = pwd > f2
+    pipeline = ft_argtrim(pipeline, " ");
     print_arg(pipeline);
     while (pipeline[i])
     {
-        s = ft_splitt(pipeline[i], "><>>"); // s[0]= echo tet> >s[1] = f1 > s[2] = f2;
+        red = treat_red(pipeline[i]); 
         s = ft_splitt(pipeline[i], "  ");
         op = opr(pipeline[i]);
         if (op)
             s = remove_arg(s, op);
         s = ft_argtrim(s, "\"'");
         cmd = ft_cmd_new(get_path(s[0]), s, op);
+        cmd->red = red;
         ft_cmd_add_back(&g_cmd, cmd);
         i++;
     }
@@ -108,8 +110,7 @@ void print_arg(char **arg)
     i = 0;
     while(arg[i])
     {
-        if (strcmp(arg[i], "|") && strcmp(arg[i], ";"))
-             printf("arg[%d] |%s|\n",i, arg[i]);
+        printf("arg[%d] |%s|\n",i, arg[i]);
         i++;
     }
 }
@@ -123,6 +124,11 @@ void    print_cmd(t_cmd *cmd)
 	{
 		printf("cmd %s\n", tmp->cmd);
         print_arg(tmp->arg);
+        while (cmd->red)
+        {
+            printf("type: %s file: %s\n", cmd->red->red_type, cmd->red->file);
+            cmd->red = cmd->red->next;
+        }
         printf("opr |%s|\n", tmp->op);
 		tmp = tmp->next;
 	}

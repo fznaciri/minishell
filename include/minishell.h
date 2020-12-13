@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/11 20:24:32 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/13 10:44:52 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char    **ft_argtrim(char **arg, char *set);
 void    remove_env(char *s);
 int exec(t_cmd cmd);
 int     execute(t_cmd *cmd);
+t_red    *treat_red(char *pipeline);
+char  *extract_file(char *s, char *set);
 
 char **g_env;
 int g_status;
