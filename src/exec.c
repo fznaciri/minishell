@@ -48,6 +48,7 @@ int     execute(t_cmd *cmd)
             if (!strcmp(cmd->cmd, builtins_str[i]))
             {
                 g_sh.status = (*builtins[i])(cmd->arg);
+                close(cmd->pipe[1]);
                 built = 1;
             }    
             i++;
