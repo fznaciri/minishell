@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 11:29:32 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/17 12:02:41 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ char *builtins_str[BUILTINS_NUM];
 char    *ft_getenv(char *name);
 void    treat_line(char *line);
 void    print_cmd(t_cmd *cmd);
-void print_arg(char **arg);
+void    print_arg(char **arg);
 char    *opr(char *s);
 char    *get_path(char *s);
 void    init_env(char **env);
 char    **remove_arg(char **arg, char *s);
-int is_space(char c);
+int     is_space(char c);
 void    skip_spaces(char **s);
 int     arg_num(char **arg);
 // builtins
@@ -61,7 +61,12 @@ int     execute(t_cmd *cmd);
 t_red    *treat_red(char *pipeline);
 char  *extract_file(char *s, char *set);
 char    *remove_red(char *cmd);
+void    setup_pipe(t_cmd *cmd);
+void reset_std();
+void open_pipe();
+void close_pipe();
 
-char **g_env;
-int g_status;
+
+int g_pipe[2];
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:56:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 12:28:20 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/17 11:38:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int cmd_env(char **arg)
     int i;
 
     i = 0;
-    while(g_env[i])
+    while(g_sh.env[i])
     {
-        ft_putstr_fd(g_env[i], 1);
+        ft_putstr_fd(g_sh.env[i], 1);
         write(1, "\n", 1);
         i++;
     }

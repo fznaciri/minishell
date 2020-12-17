@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:09:31 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 18:18:09 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/17 11:39:45 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void    remove_env(char *s)
     int j;
     
     i = 0;
-    while (g_env[i])
+    while (g_sh.env[i])
     {
-        if (ft_strncmp(g_env[i], s, ft_strlen(s)) == 0)
+        if (ft_strncmp(g_sh.env[i], s, ft_strlen(s)) == 0)
         {
             j = 0;
-            free(g_env[i]);
-            while (g_env[i + j])
+            free(g_sh.env[i]);
+            while (g_sh.env[i + j])
             {
-                g_env[i + j] = g_env[i + j + 1];
+                g_sh.env[i + j] = g_sh.env[i + j + 1];
                 j++;
             }
         }

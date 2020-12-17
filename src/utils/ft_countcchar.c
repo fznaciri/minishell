@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_delone.c                                       :+:      :+:    :+:   */
+/*   ft_countcchar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/11 13:28:09 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/17 10:58:11 by fnaciri-         ###   ########.fr       */
+/*   Created: 2020/12/13 14:01:27 by fnaciri-          #+#    #+#             */
+/*   Updated: 2020/12/13 14:01:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 
-void	ft_cmd_delone(t_cmd *cmd)
+int     ft_countchar(char *s, char c)
 {
-	if (cmd)
-	{
-		if (cmd->cmd)
-			free(cmd->cmd);
-		if (cmd->arg)
-			free(cmd->arg);
-    	cmd = NULL;	
-	}
-}
-
-void    ft_cmd_clear(t_cmd **cmd)
-{
-    t_cmd *tmp;
-
-    tmp = *cmd;
-    while (tmp)
+    int i;
+    int j;
+    i = 0;
+    j = 0;
+    while (s[i])
     {
-        ft_cmd_delone(tmp);
-        tmp = tmp->next;
+        if (s[i] == c && s[i + 1] != c)
+            j++;
+        i++;
     }
-	free(*cmd);
-    *cmd = NULL;
+    return j;
 }

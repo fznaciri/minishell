@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 10:47:10 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/17 12:03:57 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,22 @@ typedef struct s_cmd
     char **arg;
     char *op;
     t_red *red;
+    int     pipe[2];
     struct s_cmd *next;
     struct s_cmd *prev;
     
 } t_cmd;
 
+typedef struct s_sh
+{
+    char **env;
+    int status;
+    pid_t pid;
+    int in;
+    int out;
+} t_sh;
 
+t_sh    g_sh;
 t_cmd   *g_cmd;
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:14:23 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/10 18:18:01 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/17 11:37:25 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ char *ft_getenv(char *name)
 
     i = 0;
     l = ft_strlen(name);
-    while (g_env[i])
+    while (g_sh.env[i])
     {
         j = 0;
         while (j <= l)
         {
-            if (g_env[i][j] != name[j])
+            if (g_sh.env[i][j] != name[j])
                 break ;
             j++;
             if (j == l)
-                return g_env[i] + j + 1;
+                return g_sh.env[i] + j + 1;
         }
         i++;  
     }
@@ -43,11 +43,11 @@ void    init_env(char **env)
 
     i = 0;
     n = arg_num(env);
-    g_env = malloc(sizeof(char *) * n + 1);
+    g_sh.env = malloc(sizeof(char *) * (n + 1));
     while (env[i])
     {
-        g_env[i] = ft_strdup(env[i]);
+        g_sh.env[i] = ft_strdup(env[i]);
         i++;
     }
-    g_env[i] = NULL;
+    g_sh.env[i] = NULL;
 }

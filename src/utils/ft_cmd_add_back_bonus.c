@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 18:19:11 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/01 10:30:54 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/15 10:33:43 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_cmd_add_back(t_cmd **alst, t_cmd *new)
 	{
 		tmp = ft_cmd_last(tmp);
 		tmp->next = new;
+		new->prev = tmp;
 	}
 	else
 		*alst = new;
