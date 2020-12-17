@@ -42,6 +42,7 @@ int     execute(t_cmd *cmd)
     while (cmd)
     {
         setup_pipe(cmd);
+        setup_red(cmd);
         i = 0;
         while (i < BUILTINS_NUM)
         {
@@ -62,8 +63,30 @@ int     execute(t_cmd *cmd)
     return 0;
 }
 
-// void    setup_red(t_cmd cmd)
-// {
-//     if (cmd.red->type == ">")
-        
-// }
+void    setup_red(t_cmd *cmd)
+{
+    t_red *red;
+
+    red = cmd->red;
+    while (red)
+    {
+        if (red->red_type[0] == '>')
+        {
+            printf("test\n");
+            cmd->fd_out = open(red->file, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+        }
+        else if (red->red_type[0] == '>' && red->red_type[1] == '>')
+            cmd->fd_out = open(red->file, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
+        if (red->red_type[0] == '<')
+            cmd->fd_in = open(red->file, O_CREAT | O_RDONLY, S_IRWXU);
+        if (red->next && red->red_type[0] == '>')
+            close(cmd->fd_out);
+        // if (red->next && red->type[0] == '<')
+        //     close(cmd.fd_in);
+        red = red->next;
+    }
+    if (cmd->fd_in)
+        dup2(cmd->fd_in, 0);
+    if (cmd->fd_out)
+        dup2(cmd->fd_out, 0);
+}

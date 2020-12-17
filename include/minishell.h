@@ -23,6 +23,7 @@
 #include <time.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 # define BUILTINS_NUM 7
 
@@ -65,7 +66,7 @@ void    setup_pipe(t_cmd *cmd);
 void reset_std();
 void open_pipe();
 void close_pipe();
-
+void    setup_red(t_cmd *cmd);
 
 int g_pipe[2];
 

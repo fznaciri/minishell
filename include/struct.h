@@ -25,7 +25,9 @@ typedef struct s_cmd
     char *cmd;
     char **arg;
     char *op;
-    t_red *red;
+    t_red *red; 
+    int fd_in;
+    int fd_out;
     int     pipe[2];
     struct s_cmd *next;
     struct s_cmd *prev;

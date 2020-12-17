@@ -34,7 +34,7 @@ int main(int ac, char **av, char **env)
         gnl(0, &g_line);
         // printf("%s\n", g_line);
         treat_line(g_line);
-        print_cmd(g_cmd);
+        //print_cmd(g_cmd);
         open_pipe();
         g_sh.status = execute(g_cmd);
         close_pipe();
