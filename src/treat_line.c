@@ -120,16 +120,19 @@ void print_arg(char **arg)
 void    print_cmd(t_cmd *cmd)
 {
     t_cmd *tmp = cmd;
+    t_red *red;
+
+    red = tmp->red;
 	if (!tmp)
 		printf("NULL\n");
 	while (tmp)
 	{
 		printf("cmd %s\n", tmp->cmd);
         print_arg(tmp->arg);
-        while (cmd->red)
+        while (red)
         {
-            printf("type: %s file: %s\n", cmd->red->red_type, cmd->red->file);
-            cmd->red = cmd->red->next;
+            printf("type: %s file: %s\n", red->red_type, red->file);
+            red = red->next;
         }
         printf("opr |%s|\n", tmp->op);
 		tmp = tmp->next;

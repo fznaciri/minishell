@@ -35,7 +35,7 @@ t_red    *treat_red(char *pipeline)
             red_type = ft_strdup(">");
         if (red_type)
         {
-            red = ft_red_new(red_type, extract_file(pipeline + i + 1, " ><"));
+            red = ft_red_new(red_type, ft_strtrim(extract_file(pipeline + i + 1, " ><"), " "));
             ft_red_add_back(&red_list, red);
         }
         red_type = NULL;
