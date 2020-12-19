@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/17 12:02:41 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/19 10:44:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include<signal.h>
 
 # define BUILTINS_NUM 7
 
 int (*builtins[BUILTINS_NUM])(char **);
 char *builtins_str[BUILTINS_NUM];
-
+void prompt();
 char    *ft_getenv(char *name);
 void    treat_line(char *line);
 void    print_cmd(t_cmd *cmd);
@@ -67,7 +68,7 @@ void reset_std();
 void open_pipe();
 void close_pipe();
 void    setup_red(t_cmd *cmd);
-
+void sig_handler(int signum);
 int g_pipe[2];
 
 #endif
