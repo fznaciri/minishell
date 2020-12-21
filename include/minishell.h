@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/19 10:44:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/21 12:13:03 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 int (*builtins[BUILTINS_NUM])(char **);
 char *builtins_str[BUILTINS_NUM];
+
 void prompt();
 char    *ft_getenv(char *name);
 void    treat_line(char *line);
@@ -38,6 +39,7 @@ void    print_arg(char **arg);
 char    *opr(char *s);
 char    *get_path(char *s);
 void    init_env(char **env);
+void inc_shlvl();
 char    **remove_arg(char **arg, char *s);
 int     is_space(char c);
 void    skip_spaces(char **s);
@@ -69,6 +71,8 @@ void open_pipe();
 void close_pipe();
 void    setup_red(t_cmd *cmd);
 void sig_handler(int signum);
+int     ft_count_space(char *s);
+int     ft_redcount(char *cmd, int l);
 int g_pipe[2];
 
 #endif

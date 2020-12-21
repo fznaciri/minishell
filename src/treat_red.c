@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 11:22:46 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/21 12:15:45 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,56 @@ char  *extract_file(char *s, char *set)
 
 char    *remove_red(char *cmd)
 {
-    int tab[3];
-    int i;
+    int s;
+    int len;
     char *new;
-    tab[0] = ft_strchrn(cmd, '>');
-    tab[1] = ft_strchrn(cmd, '<');
-    tab[2] = ft_strnchrn(cmd, ">>");
-    i = ft_tab_min(tab, 3);
-    if (i)
-        return (ft_substr(cmd, 0, i));
-    return ft_strdup(cmd);
+    
+    len = ft_redcount(cmd, (int)ft_strlen(cmd));
+    s = ft_strnchrn(cmd, "><");
+    new = ft_strndup(cmd, s);
+    new = ft_strjoin(new, cmd + len + s);
+    return new;
+}
+
+int     ft_redcount(char *cmd, int l)
+{
+    int i;
+    int j;
+    int r;
+    int len;
+    i = 0;
+    j = 0;
+    r = 0;
+    while (i < l)
+    {
+        if (cmd[i] == '>' && cmd[i + 1] == '>')
+        {
+            j = j + 2;
+            i++;
+            r = 1;
+        }
+        else if (cmd[i] == '>' || cmd[i] == '<')
+        {
+            j++;
+            r = 1;
+        }
+        if (r)
+        {
+            len = ft_strlen(extract_file(cmd + i + 1, " ><;|"));
+            j = j + len + (ft_strnchrn(cmd + i + 1 + len, "><") ? ft_count_space(cmd + i + 1 + len) : 0);
+            i = i + j - 1;
+        }
+        r = 0;
+        i++;
+    }
+    return j;
+}
+
+int     ft_count_space(char *s)
+{
+    int i;
+    i =0;
+    while (s[i] && (s[i] == ' ' || s[i] == '\t'))
+        i++;
+    return i;
 }
