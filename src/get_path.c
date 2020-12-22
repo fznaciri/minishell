@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 18:19:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/09 14:16:25 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2020/12/22 10:47:07 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int     is_builtins(char *s)
     int i;
 
     i = 0;
-    while (builtins_str[i])
+    while (i < BUILTINS_NUM)
     {
         if (!ft_strncmp(s, builtins_str[i], ft_strlen(builtins_str[i])))
             return 1;
