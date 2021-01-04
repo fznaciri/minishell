@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/21 12:03:53 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:18:52 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void    treat_line(char *line)
     i = 0;
     pipeline = ft_splitt(line, "|;");
     pipeline = ft_argtrim(pipeline, " ");
-    print_arg(pipeline);
+    // print_arg(pipeline);
     while (pipeline[i])
     {
-        pipeline[i] = ft_strremove(pipeline[i], '\\');
+       
         red = treat_red(pipeline[i]); 
         op = opr(pipeline[i]);
         pipeline[i] =  remove_red(pipeline[i]);
@@ -44,6 +44,96 @@ void    treat_line(char *line)
         i++;
     }
 }
+
+
+char    *restruct_line(char *l)
+{
+    int i;
+    char *line;
+    char *v;
+    
+    i = 0;
+    line = NULL;
+    while(l[i])
+    {
+        if (l[i - 1] != '\\' && l[i] == '$' && !is_space(l[i + 1]))
+        {
+            if (l[i + 1] == '?')
+            {
+                line = ft_strjoin(line, ft_itoa(g_sh.status));
+                i++;
+            }
+            else
+            {
+                v = extract(l + i + 1, "$");
+                line = ft_strjoin(line, getenv(v));
+                i += ft_strlen(v);
+            }
+        }
+        if (l[i] == '~' && l[i - 1] != '\\')
+        {
+            i++;
+            line = ft_strjoin(line, getenv("HOME"));
+        }
+        else
+            line = ft_strappend(line, l[i]);
+        i++;
+    }
+    printf("%s\n", line);
+    return (line);
+}
+
+// char    *ft_refactor_line(char *s)
+// {
+//     char *var;
+//     char *line;
+//     int i;
+//     int j;
+//     line = NULL;
+//     i = 0;
+//     while (s[i])
+//     {
+//         if (s[i] == '\'' && s[i - 1] != '\\')
+//         {
+//             i++;
+//             while (s[i] != '\'')
+//             {
+//                 line = ft_strappend(line, s[i]);
+//                 i++;
+//             }
+//         }
+//         if (s[i] == '$' && !ft_is_space(s[i + 1]) && s[i - 1] != '\\')
+//         {
+//             if (s[i + 1] == '?')
+//             {
+//                 line = ft_strjoin(line, ft_itoa(g_sh.status));
+//                 i++;
+//             }
+//             else
+//             {
+//                 var = ft_getword(s + i + 1, "\" '\\");
+//                 line = ft_strjoin(line, ft_getenv(var));
+//                 i = i + ft_strlen(var);
+//             }
+//         }
+//         else if (s[i] == '~'  && s[i - 1] != '\\')
+//         {
+//             line = ft_tilde(line, i);
+//             i = (s[i + 1] == '+' ? i + 1 : i);
+//         }
+//         else
+//             line = ft_strappend(line, s[i]);
+//         i++;
+//     }
+//     free(s);
+//     return line;
+// }
+
+
+
+
+
+
 
 char    **ft_argtrim(char **arg, char *set)
 {
@@ -93,6 +183,7 @@ int     arg_num(char **arg)
         i++;
     return (i);
 }
+
 char    *opr(char *s)
 {
     int i;

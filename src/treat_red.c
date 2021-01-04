@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/21 12:15:45 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/04 10:28:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_red    *treat_red(char *pipeline)
             red_type = ft_strdup(">");
         if (red_type)
         {
-            red = ft_red_new(red_type, ft_strtrim(extract_file(pipeline + i + 1, " ><"), " "));
+            red = ft_red_new(red_type, ft_strtrim(extract(pipeline + i + 1, " ><"), " "));
             ft_red_add_back(&red_list, red);
         }
         red_type = NULL;
@@ -44,7 +44,7 @@ t_red    *treat_red(char *pipeline)
     return (red_list);
 }
 
-char  *extract_file(char *s, char *set)
+char  *extract(char *s, char *set)
 {
     int i;
     int j;
@@ -100,7 +100,7 @@ int     ft_redcount(char *cmd, int l)
         }
         if (r)
         {
-            len = ft_strlen(extract_file(cmd + i + 1, " ><;|"));
+            len = ft_strlen(extract(cmd + i + 1, " ><;|"));
             j = j + len + (ft_strnchrn(cmd + i + 1 + len, "><") ? ft_count_space(cmd + i + 1 + len) : 0);
             i = i + j - 1;
         }

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/17 12:05:31 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:14:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int     execute(t_cmd *cmd)
     built = 0;
     while (cmd)
     {
+        wrap_exec(&cmd);
         setup_pipe(cmd);
         setup_red(cmd);
         i = 0;
@@ -78,14 +79,23 @@ void    setup_red(t_cmd *cmd)
             cmd->fd_out = open(red->file, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
         if (red->red_type[0] == '<')
             cmd->fd_in = open(red->file, O_RDONLY, S_IRWXU);
-        // if (red->next && red->red_type[0] == '>')
-        //     close(cmd->fd_out);
-        // if (red->next && red->red_type[0] == '<')
-        //     close(cmd->fd_in);
         red = red->next;
     }
     if (cmd->fd_in)
         dup2(cmd->fd_in, 0);
     if (cmd->fd_out)
         dup2(cmd->fd_out, 1);
+}
+
+void wrap_exec(t_cmd **cmd)
+{
+    int i;
+
+    i = 0;
+    while ((*cmd)->arg[i])
+    {
+        (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
+        (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
+        i++;
+    }
 }

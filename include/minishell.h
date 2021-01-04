@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/21 12:34:11 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:10:06 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char    *get_path(char *s);
 char    **remove_arg(char **arg, char *s);
 int     arg_num(char **arg);
 char    **ft_argtrim(char **arg, char *set);
-
+char    *restruct_line(char *l);
+void wrap_exec(t_cmd **cmd);
 //print
 void    print_cmd(t_cmd *cmd);
 void    print_arg(char **arg);
@@ -78,7 +79,7 @@ int         execute(t_cmd *cmd);
 
 //redirection
 t_red       *treat_red(char *pipeline);
-char        *extract_file(char *s, char *set);
+char        *extract(char *s, char *set);
 char        *remove_red(char *cmd);
 void        setup_red(t_cmd *cmd);
 

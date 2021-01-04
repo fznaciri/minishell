@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 11:38:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 10:29:29 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/04 10:28:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ t_red    *treat_red(char *pipeline)
     }
     if (red_type)
     {
-        red = ft_red_new(red_type; extract_file(pipeline + i + 1));
+        red = ft_red_new(red_type; extract(pipeline + i + 1));
         ft_red_add_back(&red_list, red);
     }
     return (red_list)
 }
 
-char  *extract_file(char *s)
+char  *extract(char *s)
 {
     int i;
     int j;
