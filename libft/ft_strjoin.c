@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 10:54:30 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/11/26 18:15:58 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:07:41 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	if (!s1 && !s2)
+		return NULL;
 	if (!s1 && s2)
 		return (ft_strdup(s2));
 	if (s1 && !s2)

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 11:14:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:17:18 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void wrap_exec(t_cmd **cmd)
     while ((*cmd)->arg[i])
     {
         (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
-        (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
+        if ((*cmd)->arg[i])
+            (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
         i++;
     }
 }

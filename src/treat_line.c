@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 11:18:52 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/05 12:13:41 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,68 +70,14 @@ char    *restruct_line(char *l)
                 i += ft_strlen(v);
             }
         }
-        if (l[i] == '~' && l[i - 1] != '\\')
-        {
-            i++;
+        else if (l[i] == '~' && l[i - 1] != '\\')
             line = ft_strjoin(line, getenv("HOME"));
-        }
         else
             line = ft_strappend(line, l[i]);
         i++;
     }
-    printf("%s\n", line);
     return (line);
 }
-
-// char    *ft_refactor_line(char *s)
-// {
-//     char *var;
-//     char *line;
-//     int i;
-//     int j;
-//     line = NULL;
-//     i = 0;
-//     while (s[i])
-//     {
-//         if (s[i] == '\'' && s[i - 1] != '\\')
-//         {
-//             i++;
-//             while (s[i] != '\'')
-//             {
-//                 line = ft_strappend(line, s[i]);
-//                 i++;
-//             }
-//         }
-//         if (s[i] == '$' && !ft_is_space(s[i + 1]) && s[i - 1] != '\\')
-//         {
-//             if (s[i + 1] == '?')
-//             {
-//                 line = ft_strjoin(line, ft_itoa(g_sh.status));
-//                 i++;
-//             }
-//             else
-//             {
-//                 var = ft_getword(s + i + 1, "\" '\\");
-//                 line = ft_strjoin(line, ft_getenv(var));
-//                 i = i + ft_strlen(var);
-//             }
-//         }
-//         else if (s[i] == '~'  && s[i - 1] != '\\')
-//         {
-//             line = ft_tilde(line, i);
-//             i = (s[i + 1] == '+' ? i + 1 : i);
-//         }
-//         else
-//             line = ft_strappend(line, s[i]);
-//         i++;
-//     }
-//     free(s);
-//     return line;
-// }
-
-
-
-
 
 
 
