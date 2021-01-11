@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/05 11:50:44 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/11 10:24:42 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void prompt()
     char *s;
 
     s = getcwd(NULL, 0);
-    write(1, "\033[0;31m", 8);
-    write(1," ->", 3);
-    write(1, s, strlen(s));
-    write(1, "$> ", 3);
-    write(1, "\033[0m", 5); 
+    write(2, "\033[0;31m", 8);
+    write(2," ->", 3);
+    write(2, s, strlen(s));
+    write(2, "$> ", 3);
+    write(2, "\033[0m", 5); 
 }
 
 void inc_shlvl()

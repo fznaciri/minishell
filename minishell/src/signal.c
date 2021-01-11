@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_exit.c                                         :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 14:04:31 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 10:37:50 by fnaciri-         ###   ########.fr       */
+/*   Created: 2020/12/19 10:28:28 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/01/11 15:59:07 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
-int    cmd_exit(char **arg)
+void sig_handler(int signum)
 {
-    ft_putstr_fd("exit", 1);
-    exit(0);
-    return (0);
+    if (!g_sh.pid && signum == SIGINT)
+    {
+        write(1, "\n", 1);
+        prompt();
+    }       
+    else if (signum == SIGQUIT)
+    {
+        // kill(g_sh.pid, SIGQUIT);
+       exit(0);
+    }
 }
