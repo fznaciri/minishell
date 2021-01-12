@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:14:48 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 11:11:19 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 12:17:00 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int     cmd_cd(char **arg)
     }
     if (n == 2)
     {
-        // if (!ft_strncmp(arg[1], "~", 1))
-        //     arg[1] = ft_strdup(getenv("HOME"));
         if (!chdir(arg[1]))
         {
             pwd = getcwd(NULL, 0);
@@ -43,10 +41,19 @@ int     cmd_cd(char **arg)
             free(tmp);
             free(pwd);
         }
+        else
+        {
+            ft_putstr_fd("-bash: cd: ", 2);
+            ft_putstr_fd(arg[1], 2);
+            ft_putstr_fd(": ", 2);
+            ft_putstr_fd(strerror(errno), 2);
+            write(2, "\n", 1);
+            return 1;
+        }  
     }
     else
     {
-        write(1, "cd: No such file or directory:\n", 32);
+        write(2, "cd: No such file or directory:\n", 32);
         return (1);
     }    
     free(oldpwd);

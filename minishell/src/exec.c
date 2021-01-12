@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 11:53:20 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 12:10:00 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int exec(t_cmd cmd)
     {
         if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
         {
+            ft_putstr_fd("-bash ", 2);
+            ft_putstr_fd(cmd.cmd, 2);
+            ft_putstr_fd(": command not found\n", 2);
             if (errno == 2)
-            {
-                perror(cmd.cmd);
                 exit(127);
-            }
         }
     }
     close(cmd.pipe[1]);

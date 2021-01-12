@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 10:01:49 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 12:27:13 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int   cmd_export(char **arg)
     while (arg[i])
     {
         env = extract_env(arg[i]);
-        if (ft_isdigit(env[0]))
+        if (env && ft_isdigit(env[0]))
         {
-            ft_putstr_fd("bash: export: not a vqlid identifier ", 2);
+            ft_putstr_fd("bash: export: not a valid identifier ", 2);
             return 1;
         }
         if (ft_getenv(env))
