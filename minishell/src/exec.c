@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 11:38:23 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 11:53:20 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int     execute(t_cmd *cmd)
         reset_std();
         cmd = cmd->next;
     }  
-    return 0;
+    return g_sh.status;
 }
 
 void    setup_red(t_cmd *cmd)
