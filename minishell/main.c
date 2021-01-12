@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/11 10:24:42 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 11:47:47 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int main(int ac, char **av, char **env)
         ft_cmd_clear(&g_cmd);
         free(g_line);
     }
-    return(0);
+    return(g_sh.status);
 }

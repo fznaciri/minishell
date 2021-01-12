@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/05 12:17:18 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/12 11:38:23 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ int exec(t_cmd cmd)
     }
     else if (g_sh.pid == 0)
     {
-        execve(cmd.cmd, cmd.arg , g_sh.env);
-        perror(cmd.cmd);
-        exit(1);
+        if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
+        {
+            if (errno == 2)
+            {
+                perror(cmd.cmd);
+                exit(127);
+            }
+        }
     }
     close(cmd.pipe[1]);
     waitpid(g_sh.pid, &status, 0);
