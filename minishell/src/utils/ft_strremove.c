@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 14:00:32 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/13 14:05:04 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:00:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ char    *ft_strremove(char *s, char c)
             new[i] = s[l];
             i++;
         }
-        else if (s[l + 1] == c)
-        {
-            new[i] = s[l];
-            i++;
-        }
+        // else if (s[l + 1] == c)
+        // {
+        //     new[i] = s[l];
+        //     i++;
+        // }
         l++;
     }
     new[i] = 0;

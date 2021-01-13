@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 10:11:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:47:09 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int   cmd_export(char **arg)
 {
     int i;
     char *env;
+    char *var;
     
     if (arg_num(arg) == 1)
     {
@@ -24,8 +25,15 @@ int   cmd_export(char **arg)
         {
             if (ft_strncmp(g_sh.env[i], "_=", 2))
             {
-                write(1, "declare -x ", 11);
-                write(1, g_sh.env[i], ft_strlen(g_sh.env[i]));
+                var = extract_env(g_sh.env[i]);
+                ft_putstr_fd("declare -x ", 1);
+                ft_putstr_fd(var, 1);
+                if (var[ft_strlen(var) - 1] == '=')
+                {
+                    ft_putstr_fd("\"", 1);
+                    ft_putstr_fd(g_sh.env[i] + ft_strlen(var), 1);
+                    ft_putstr_fd("\"", 1);
+                }
                 write(1, "\n", 1);
             }
             i++;
@@ -59,14 +67,12 @@ int   cmd_export(char **arg)
 void    add_env(char *s)
 {
     int n;
-    int i;
     char **env;
 
-    i = 0;
     n = arg_num(g_sh.env);
-    env = malloc(sizeof(char *) * (n + 1));
+    env = malloc(sizeof(char *) * (n + 2));
     ft_memcpy(env, g_sh.env, n * sizeof(char*));
-    env[n] = ft_strdup(s);
+    env[n] = ft_strdup(s);  
     env[n + 1] = NULL;
     free(g_sh.env);
     g_sh.env = env;    

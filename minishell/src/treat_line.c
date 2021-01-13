@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 11:51:08 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 14:51:39 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void    treat_line(char *line)
         s = ft_splitt(pipeline[i], "  ");
         if (op)
             s = remove_arg(s, op);
-        s = ft_argtrim(s, "\"'");
+        // s = ft_argtrim(s, "\"'");
         cmd = ft_cmd_new(ft_strtrim(get_path(s[0]), " "), s, op);
         cmd->red = red;
         ft_cmd_add_back(&g_cmd, cmd);
