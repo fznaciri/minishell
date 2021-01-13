@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 11:40:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 11:54:09 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int     execute(t_cmd *cmd)
         setup_pipe(cmd);
         setup_red(cmd);
         i = 0;
-        while (i < BUILTINS_NUM)
+        while (i < BUILTINS_NUM && cmd->cmd)
         {
             if (!strcmp(cmd->cmd, builtins_str[i]))
             {
@@ -60,7 +60,7 @@ int     execute(t_cmd *cmd)
             }    
             i++;
         }
-        if (!built)
+        if (!built && cmd->cmd)
             g_sh.status = exec(*cmd);
         built = 0;
         reset_std();
@@ -98,7 +98,6 @@ void wrap_exec(t_cmd **cmd)
 
     i = 0;
     (*cmd)->cmd = restruct_line((*cmd)->cmd);
-    
     while ((*cmd)->arg[i])
     {
         (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
