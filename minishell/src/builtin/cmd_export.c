@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 12:27:13 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:11:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ int   cmd_export(char **arg)
     i = 1;
     while (arg[i])
     {
+        if (arg[i][0] == '=')
+        {
+            ft_putstr_fd("bash: export: ",2);
+            ft_putstr_fd(arg[i], 2);
+            ft_putstr_fd(" : not a valid identifier\n", 2);
+            return 1;
+        }
         env = extract_env(arg[i]);
         if (env && ft_isdigit(env[0]))
         {
-            ft_putstr_fd("bash: export: not a valid identifier ", 2);
+            ft_putstr_fd("bash: export: not a valid identifier\n", 2);
             return 1;
         }
         if (ft_getenv(env))
@@ -57,7 +64,7 @@ void    add_env(char *s)
 
     i = 0;
     n = arg_num(g_sh.env);
-    env = malloc(sizeof(char *) * (n + 2));
+    env = malloc(sizeof(char *) * (n + 1));
     ft_memcpy(env, g_sh.env, n * sizeof(char*));
     env[n] = ft_strdup(s);
     env[n + 1] = NULL;
@@ -68,19 +75,9 @@ void    add_env(char *s)
 void    replace_env(char *s)
 {
     int i;
-    // int j;
     char *str;
     
     i = 0;
-    // j = 0;
-    // str = s;
-    // while (s[j])
-    // {
-    //     if (s[j] == '=')
-    //          break ;
-    //     j++;
-    // }
-    // str = ft_substr(str, 0, j + 1);
     str = extract_env(s);
     while (g_sh.env[i])
     {

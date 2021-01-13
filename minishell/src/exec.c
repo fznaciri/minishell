@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 12:10:00 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/13 11:40:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void wrap_exec(t_cmd **cmd)
     int i;
 
     i = 0;
+    (*cmd)->cmd = restruct_line((*cmd)->cmd);
+    
     while ((*cmd)->arg[i])
     {
         (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
