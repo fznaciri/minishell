@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/15 18:50:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/15 19:18:56 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,56 @@ void    setup_red(t_cmd *cmd)
         dup2(cmd->fd_out, 1);
 }
 
-void wrap_exec(t_cmd **cmd)
+// void wrap_exec(t_cmd **cmd)
+// {
+//     int i;
+
+//     i = 0;
+//     (*cmd)->cmd = restruct_line((*cmd)->cmd);
+//     // printf("|%s|\n", (*cmd)->cmd);
+//     while ((*cmd)->arg[i])
+//     {
+//         (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
+//         printf("|%d:%s|\n", i, (*cmd)->arg[i]);     
+//         if ((*cmd)->arg[i])
+//         {
+//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
+//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\'');
+//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '"');
+//         }    
+//         printf("|%d:%s|\n", i, (*cmd)->arg[i]);
+//         i++;
+//     }
+// }
+
+void    wrap_exec(t_cmd **cmd)
 {
     int i;
+    int j;
+    char **arg;
+    char *tmp;
 
-    i = 0;
     (*cmd)->cmd = restruct_line((*cmd)->cmd);
-    // printf("|%s|\n", (*cmd)->cmd);
+    arg = malloc((arg_num((*cmd)->arg) + 1) * sizeof(char*));
+    i = 0;
+    j = 0;
     while ((*cmd)->arg[i])
     {
-        (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
-        // printf("|%d:%s|\n", i, (*cmd)->arg[i]);     
-        if ((*cmd)->arg[i])
+        tmp = restruct_line((*cmd)->arg[i]);
+        if (tmp)
         {
-            (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
-            (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\'');
-            (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '"');
-            // printf("|%d:%s|\n", i, (*cmd)->arg[i]);
-        }    
+            arg[j] = tmp;
+            if (arg[j])
+            {
+                arg[j] = ft_strremove(arg[j], '"');
+                arg[j] = ft_strremove(arg[j], '\'');
+                arg[j] = ft_strremove(arg[j], '\\');
+                //printf("arg : %s\n", (*cmd)->arg[i]);
+            }
+            j++;
+        }
         i++;
     }
+    arg[j] = NULL;
+    (*cmd)->arg = arg;
 }
