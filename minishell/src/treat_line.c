@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/15 17:10:15 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/15 18:53:58 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ char    *restruct_line(char *l)
     line = NULL;
     while(l[i])
     {
+        if (l[i] == '\'' && l[i - 1] != '\\')
+        {
+            i++;
+            while (l[i] != '\'')
+            {
+                line = ft_strappend(line, l[i]);
+                i++;
+            }
+        }
         if (l[i - 1] != '\\' && l[i] == '$' && !is_space(l[i + 1]))
         {
             if (l[i + 1] == '?')
@@ -63,14 +72,18 @@ char    *restruct_line(char *l)
                 line = ft_strjoin(line, ft_itoa(g_sh.status));
                 i++;
             }
+            else if (!ft_isalpha(l[i + 1]) || ft_isdigit(l[i + 1]) || l[i + 1] == '=')
+            {
+                if (ft_isdigit(l[i + 1]))
+                    i += 2;
+                line = ft_strappend(line, l[i]);
+            }
             else
             {
-                v = extract(l + i + 1, "$");
-                // printf("v: %s\n", v);
+                v = extract(l + i + 1, "\"$= ");
                 if (v)
                 {
                     line = ft_strjoin(line, ft_getenv(v));
-                    // printf("line: %s\n", line);
                     i += ft_strlen(v);
                 }
                 else
@@ -84,10 +97,9 @@ char    *restruct_line(char *l)
             line = ft_strappend(line, l[i]);
         i++;
     }
+    // printf("line: %s\n", line);
     return (line);
 }
-
-
 
 char    **ft_argtrim(char **arg, char *set)
 {
