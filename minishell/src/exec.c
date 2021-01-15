@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 14:59:48 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/15 17:14:43 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int     execute(t_cmd *cmd)
     while (cmd)
     {
         wrap_exec(&cmd);
+        // print_cmd(&cmd);
         setup_pipe(cmd);
         setup_red(cmd);
         i = 0;
@@ -109,4 +110,5 @@ void wrap_exec(t_cmd **cmd)
         }    
         i++;
     }
+    printf("|%s|\n", (*cmd)->cmd);
 }
