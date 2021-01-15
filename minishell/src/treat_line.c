@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 14:51:39 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/15 16:37:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,16 @@ char    *restruct_line(char *l)
             else
             {
                 v = extract(l + i + 1, "$");
-                line = ft_strjoin(line, getenv(v));
-                i += ft_strlen(v);
+                printf("v: %s\n", v);
+                if (v)
+                {
+                    line = ft_strjoin(line, ft_getenv(v));
+                    printf("line: %s\n", line);
+                    i += ft_strlen(v);
+                }
+                else
+                    line = ft_strappend(line, l[i]);
+                
             }
         }
         else if (l[i] == '~' && l[i - 1] != '\\')

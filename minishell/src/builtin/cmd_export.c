@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 15:47:09 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/15 16:16:48 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ void    add_env(char *s)
     ft_memcpy(env, g_sh.env, n * sizeof(char*));
     env[n] = ft_strdup(s);  
     env[n + 1] = NULL;
-    free(g_sh.env);
-    g_sh.env = env;    
+    g_sh.env = env;
 }
 
 void    replace_env(char *s)
