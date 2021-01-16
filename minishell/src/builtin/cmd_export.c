@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/15 16:16:48 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/16 17:51:04 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,32 @@ void    replace_env(char *s)
 {
     int i;
     char *str;
+    // char *n;
+    // char *val;
+    // char *var;
     
     i = 0;
     str = extract_env(s);
+    // printf("%s\n", s);
+    // printf("%s\n", str);
     while (g_sh.env[i])
     {
+        // n = ft_strchr(s, '+');
+        // if (n && n[1] == '=')
+        // {
+        //     val = ft_getenv(n - s);
+        //     val = ft_strjoin(val, n + 2);
+        //     var = ft_strdup(n - s);
+            
+        // }
+        
         if (ft_strncmp(g_sh.env[i], str, ft_strlen(str)) == 0)
         {
+            // if (str[ft_strlen(str) - 2] == '+')
+            // {
+            //     printf("%s\n", ft_getenv(str));
+            //     g_sh.env[i] = ft_strjoin(ft_getenv(str), s);
+            // }
             g_sh.env[i] = ft_strdup(s);
         }
         i++;

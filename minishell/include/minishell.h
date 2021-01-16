@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 11:10:06 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/16 17:56:58 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <signal.h>
+#include <dirent.h>
 
 # define BUILTINS_NUM 7
 

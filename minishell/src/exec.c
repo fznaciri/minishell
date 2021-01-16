@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/15 19:18:56 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/16 18:06:34 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int exec(t_cmd cmd)
 {
     int   status;
+    DIR  *dir;
+    int err;
     
     if ((g_sh.pid = fork()) == -1) 
     {
@@ -25,11 +27,26 @@ int exec(t_cmd cmd)
     {
         if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
         {
+            err = errno;
             ft_putstr_fd("-bash ", 2);
             ft_putstr_fd(cmd.cmd, 2);
-            ft_putstr_fd(": command not found\n", 2);
-            if (errno == 2)
+            dir = opendir(cmd.cmd);
+            if (dir)
+            {
+                closedir(dir);
+                ft_putendl_fd(": is a directory", 2);
+            }
+            else if (err == 2)
+            {
+                ft_putstr_fd(": command not found\n", 2);
                 exit(127);
+            }
+            else
+            {
+                ft_putstr_fd(" ", 2);
+                ft_putendl_fd(strerror(err), 2);
+            }
+            exit(126);
         }
     }
     close(cmd.pipe[1]);
@@ -137,7 +154,7 @@ void    wrap_exec(t_cmd **cmd)
                 arg[j] = ft_strremove(arg[j], '"');
                 arg[j] = ft_strremove(arg[j], '\'');
                 arg[j] = ft_strremove(arg[j], '\\');
-                //printf("arg : %s\n", (*cmd)->arg[i]);
+                // printf("arg : %s\n", (*cmd)->arg[i]);
             }
             j++;
         }
