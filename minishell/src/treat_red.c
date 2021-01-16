@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 10:28:10 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/16 23:29:45 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char    *remove_red(char *cmd)
     return new;
 }
 
-int     ft_redcount(char *cmd, int l)
+/* int     ft_redcount(char *cmd, int l)
 {
     int i;
     int j;
@@ -103,6 +103,42 @@ int     ft_redcount(char *cmd, int l)
             len = ft_strlen(extract(cmd + i + 1, " ><;|"));
             j = j + len + (ft_strnchrn(cmd + i + 1 + len, "><") ? ft_count_space(cmd + i + 1 + len) : 0);
             i = i + j - 1;
+        }
+        r = 0;
+        i++;
+    }
+    return j;
+} */
+
+int     ft_redcount(char *cmd, int l)
+{
+    int i;
+    int j;
+    int r;
+    int len;
+
+    i = 0;
+    j = 0;
+    r = 0;
+    while (i < l)
+    {
+        if (cmd[i] == '>' && cmd[i + 1] == '>')
+        {
+            j = j + 2;
+            i++;
+            r = 1;
+        }
+        else if (cmd[i] == '>' || cmd[i] == '<')
+        {
+            j++;
+            r = 1;
+        }
+        if (r)
+        {
+            len = ft_strlen(extract(cmd + i + 1, " ><;|"));
+            r = len + (ft_strnchrn(cmd + i + 1 + len, "><") ? ft_count_space(cmd + i + 1 + len) : 0);
+            i = i + r - 1;
+            j = j + r;
         }
         r = 0;
         i++;

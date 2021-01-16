@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 18:06:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/16 23:38:55 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,23 @@ void    setup_red(t_cmd *cmd)
     cmd->fd_in = 0;
     while (red)
     {
-        if (red->red_type[0] == '>' && red->red_type[1] != '>')
+        if (red && red->red_type[0] == '>' && red->red_type[1] != '>')
             cmd->fd_out = open(red->file, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-        else if (red->red_type[0] == '>' && red->red_type[1] == '>')
+        else if (red && red->red_type[0] == '>' && red->red_type[1] == '>')
             cmd->fd_out = open(red->file, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-        if (red->red_type[0] == '<')
+        if (red && red->red_type[0] == '<')
             cmd->fd_in = open(red->file, O_RDONLY, S_IRWXU);
+        if (cmd->fd_in < 0 || cmd->fd_out< 0)
+        {
+            ft_putstr_fd("-bash ", 2);
+            ft_putstr_fd(red->file, 2);
+            ft_putstr_fd(": ", 2);
+            ft_putendl_fd(strerror(errno), 2);
+        }
+        if (red->next && cmd->fd_out && red->next->red_type[0] != '<')
+            close(cmd->fd_out);
+        if (red->next && cmd->fd_in && red->next->red_type[0] == '<')
+            close(cmd->fd_in);
         red = red->next;
     }
     if (cmd->fd_in)
