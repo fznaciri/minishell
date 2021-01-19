@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:14:48 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/12 12:17:00 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/19 12:53:13 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,14 @@ int     cmd_cd(char **arg)
     {
         if (!chdir(arg[1]))
         {
-            pwd = getcwd(NULL, 0);
+            if (!(pwd = getcwd(NULL, 0)))
+            {
+                ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: ", 2);
+                ft_putendl_fd(strerror(errno), 2);
+                pwd = ft_strdup(ft_getenv("PWD"));
+                pwd = ft_strappend(pwd, '/');
+                pwd = ft_strjoin(pwd, arg[1]);
+            }
             tmp = pwd;
             pwd = ft_strjoin("PWD=", pwd);
             replace_env(pwd);
@@ -50,11 +57,6 @@ int     cmd_cd(char **arg)
             write(2, "\n", 1);
             return 1;
         }  
-    }
-    else
-    {
-        write(2, "cd: No such file or directory:\n", 32);
-        return (1);
     }    
     free(oldpwd);
     return 0;

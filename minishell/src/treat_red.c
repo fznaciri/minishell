@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 23:29:45 by mac              ###   ########.fr       */
+/*   Updated: 2021/01/19 11:08:04 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_red    *treat_red(char *pipeline)
             red_type = ft_strdup(">");
         if (red_type)
         {
-            red = ft_red_new(red_type, ft_strtrim(extract(pipeline + i + 1, " ><"), " "));
+            red = ft_red_new(red_type, ft_strtrim(extract(pipeline + i + 1, " ><;|"), " "));
             ft_red_add_back(&red_list, red);
         }
         red_type = NULL;

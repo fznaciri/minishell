@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 23:33:43 by mac              ###   ########.fr       */
+/*   Updated: 2021/01/19 12:48:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int ac, char **av, char **env)
         prompt();
         gnl(0, &g_line);
         treat_line(g_line);
-        //print_cmd(g_cmd);
+        print_cmd(g_cmd);
         open_pipe();
         g_sh.status = execute(g_cmd);
         // printf("%s\n", g_line);
