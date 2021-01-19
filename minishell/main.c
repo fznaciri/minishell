@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/19 14:24:29 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:26:44 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void prompt()
 {
-    char *s;
-
-    s = getcwd(NULL, 0);
-    write(2, "\033[0;31m", 8);
-    write(2," ->", 3);
-    write(2, s, strlen(s));
+    write(2, "\033[1;32m", 8);
+    write(2,"minishell-1.0", 14);
     write(2, "$> ", 3);
     write(2, "\033[0m", 5); 
 }
@@ -28,8 +24,13 @@ void inc_shlvl()
 {
     int i;
     char *s;
+    char *v;
 
-    i = ft_atoi(getenv("SHLVL"));
+    v = ft_getenv("SHLVL");
+    if (v)
+        i = ft_atoi(ft_getenv("SHLVL"));
+    else
+        i = ft_atoi(ft_strdup(""));
     i++;
     s = ft_strjoin("SHLVL=", ft_itoa(i));
     replace_env(s);
@@ -39,6 +40,7 @@ int main(int ac, char **av, char **env)
 {
     int i = 0;
     int status;
+    int c;
     
     g_sh.in = dup(0);
     g_sh.out = dup(1);
@@ -48,10 +50,18 @@ int main(int ac, char **av, char **env)
     init_builtins();
     signal(SIGINT,sig_handler);
     signal(SIGQUIT,sig_handler);
+    if (ac == 3 && !ft_strcmp(av[1], "-c"))
+    {
+        g_line = ft_strdup(av[2]);
+        c = 1;
+    }
     while (status)
     {
-        prompt();
-        gnl(0, &g_line);
+        if (!c)
+        {
+            prompt();
+            gnl(0, &g_line);
+        }
         treat_line(g_line);
         // print_cmd(g_cmd);
         open_pipe();
@@ -60,6 +70,8 @@ int main(int ac, char **av, char **env)
         close_pipe();
         ft_cmd_clear(&g_cmd);
         free(g_line);
+        if (c)
+            break;
     }
     return(g_sh.status);
 }

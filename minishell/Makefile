@@ -6,7 +6,7 @@
 #    By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 13:59:20 by fnaciri-          #+#    #+#              #
-#    Updated: 2020/11/26 14:09:42 by fnaciri-         ###   ########.fr        #
+#    Updated: 2021/01/19 16:23:48 by fnaciri-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ run:
 	@./$(NAME)
 
 debug:
+	@make -C libft
 	@$(CC)  -g  main.c -L ./libft -lft $(SRC) -o $(NAME) -fsanitize=address
 
 clean:

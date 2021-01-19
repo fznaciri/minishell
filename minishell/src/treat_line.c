@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/15 18:53:58 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:15:55 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char    *restruct_line(char *l)
     line = NULL;
     while(l[i])
     {
-        if (l[i] == '\'' && l[i - 1] != '\\')
+        if (l[i] == '\'' && l[i - 1 < 0 ? 1 : i - 1] != '\\')
         {
             i++;
             while (l[i] != '\'')
@@ -65,7 +65,7 @@ char    *restruct_line(char *l)
                 i++;
             }
         }
-        if (l[i - 1] != '\\' && l[i] == '$' && !is_space(l[i + 1]))
+        if (l[i - 1 < 0 ? 1 : i - 1] != '\\' && l[i] == '$' && !is_space(l[i + 1]))
         {
             if (l[i + 1] == '?')
             {
@@ -91,7 +91,7 @@ char    *restruct_line(char *l)
                 
             }
         }
-        else if (l[i] == '~' && l[i - 1] != '\\')
+        else if (l[i] == '~' && l[i - 1 < 0 ? 1 : i - 1] != '\\')
             line = ft_strjoin(line, getenv("HOME"));
         else
             line = ft_strappend(line, l[i]);
@@ -132,10 +132,10 @@ char    **remove_arg(char **arg, char *s)
         }
         i++;
     }
-    if (ft_strchr(arg[i - 1], '|') || ft_strchr(arg[i - 1], ';'))
+    if (ft_strchr(arg[i - 1 < 0 ? 1 : i - 1], '|') || ft_strchr(arg[i - 1 < 0 ? 1 : i - 1], ';'))
     {
-        l = ft_strlen(arg[i - 1]);
-        arg[i - 1][l - 1] = 0;
+        l = ft_strlen(arg[i - 1 < 0 ? 1 : i - 1]);
+        arg[i - 1 < 0 ? 1 : i - 1][l - 1] = 0;
     }
     return (arg);
 }

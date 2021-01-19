@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 17:51:04 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/19 17:56:45 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int   cmd_export(char **arg)
 {
     int i;
+    int n;
     char *env;
     char *var;
     
@@ -26,12 +27,14 @@ int   cmd_export(char **arg)
             if (ft_strncmp(g_sh.env[i], "_=", 2))
             {
                 var = extract_env(g_sh.env[i]);
+                n = ft_strnchrn(g_sh.env[i], "=");
                 ft_putstr_fd("declare -x ", 1);
                 ft_putstr_fd(var, 1);
-                if (var[ft_strlen(var) - 1] == '=')
+                if (n)
                 {
+                    ft_putchar_fd('=', 1);
                     ft_putstr_fd("\"", 1);
-                    ft_putstr_fd(g_sh.env[i] + ft_strlen(var), 1);
+                    ft_putstr_fd(g_sh.env[i] + n + 1, 1);
                     ft_putstr_fd("\"", 1);
                 }
                 write(1, "\n", 1);
@@ -58,7 +61,10 @@ int   cmd_export(char **arg)
         if (ft_getenv(env))
             replace_env(arg[i]);
         else if (!ft_getenv(env))
-            add_env(arg[i]);
+        {
+            if ()
+                add_env(arg[i]);
+        }   
         i++;
     }
     return 0;
@@ -81,34 +87,23 @@ void    replace_env(char *s)
 {
     int i;
     char *str;
-    // char *n;
-    // char *val;
-    // char *var;
+    int  n;
+    char *val;
     
     i = 0;
     str = extract_env(s);
-    // printf("%s\n", s);
-    // printf("%s\n", str);
+    n = ft_strnchrn(s, "+");
     while (g_sh.env[i])
     {
-        // n = ft_strchr(s, '+');
-        // if (n && n[1] == '=')
-        // {
-        //     val = ft_getenv(n - s);
-        //     val = ft_strjoin(val, n + 2);
-        //     var = ft_strdup(n - s);
-            
-        // }
-        
-        if (ft_strncmp(g_sh.env[i], str, ft_strlen(str)) == 0)
+        if (n && s[n + 1] == '=')
         {
-            // if (str[ft_strlen(str) - 2] == '+')
-            // {
-            //     printf("%s\n", ft_getenv(str));
-            //     g_sh.env[i] = ft_strjoin(ft_getenv(str), s);
-            // }
-            g_sh.env[i] = ft_strdup(s);
+            val = ft_getenv(str);
+            val = ft_strjoin(val, s + n + 2);
+            s = ft_strjoin(str, "=");
+            s = ft_strjoin(s, val);
         }
+        if (ft_strncmp(g_sh.env[i], str, ft_strlen(str)) == 0)
+            g_sh.env[i] = ft_strdup(s);
         i++;
     }
 }
@@ -122,10 +117,10 @@ char  *extract_env(char *s)
     str = s;
     while (s[j])
     {
-        if (s[j] == '=')
+        if (s[j] == '=' || (s[j] == '+' && s[j + 1] == '='))
              break ;
         j++;
     }
-    str = ft_substr(str, 0, j + 1);
+    str = ft_substr(str, 0, j);
     return (str);
 }
