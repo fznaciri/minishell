@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/19 16:15:55 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/20 11:35:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,39 @@ void    treat_line(char *line)
     }
 }
 
+int   check_syntax(char *line)
+{
+    int i;
+    int n;
+
+    i = 0;
+    n = ft_strlen(line);
+    while (line[i])
+    {
+        while (line[i] == ' ')
+            i++;
+        if (ft_strnchr(line, "|;"))
+             return (ft_err("bash: syntax error near unexpected token `|'", 258));
+        if (ft_strnchr(line, ";|")) 
+            return (ft_err("bash: syntax error near unexpected token `|'",258));
+        if ((ft_strnchr(line, ";;")) || line[i] == ';')
+            return (ft_err("bash: syntax error near unexpected token `;;'",258));
+        if (ft_strnchr(line, "><")  || line[i] == '>' || line[i] == '<')
+            return (ft_err("bash: syntax error near unexpected token `>'",258));
+        if (ft_strnchr(line, "||")  || line[i] == '|')
+            return (ft_err("bash: syntax error near unexpected token `|'",258));
+        if (ft_strnchrn(line, ">>>"))
+            return (ft_err("bash: syntax error near unexpected token `>'",258));
+        i++;
+    }
+    return 0;
+}
+
+int ft_err(char *s, int i)
+{
+    ft_putendl_fd(s, 2);
+    return i;
+}
 
 char    *restruct_line(char *l)
 {

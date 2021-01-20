@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/19 17:56:45 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/20 09:31:05 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,26 @@ int   cmd_export(char **arg)
             replace_env(arg[i]);
         else if (!ft_getenv(env))
         {
-            if ()
+            if (check(env))
                 add_env(arg[i]);
         }   
         i++;
     }
     return 0;
+}
+
+int check(char *env)
+{
+    int i;
+
+    i = 0;
+    while (env[i])
+    {
+        if (env[i] == '+' && env[i] != '=')
+            return 0;
+        i++;
+    }
+    return 1;
 }
 
 void    add_env(char *s)

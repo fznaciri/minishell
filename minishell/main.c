@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/19 16:26:44 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/20 12:22:39 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int main(int ac, char **av, char **env)
 {
     int i = 0;
     int status;
+    int r;
     int c;
     
     g_sh.in = dup(0);
@@ -62,16 +63,22 @@ int main(int ac, char **av, char **env)
             prompt();
             gnl(0, &g_line);
         }
-        treat_line(g_line);
-        // print_cmd(g_cmd);
-        open_pipe();
-        g_sh.status = execute(g_cmd);
-        // printf("%s\n", g_line);
-        close_pipe();
-        ft_cmd_clear(&g_cmd);
-        free(g_line);
-        if (c)
-            break;
+        if ((r = check_syntax(g_line)))
+            g_sh.status = r;
+        if (!r)
+        {
+            treat_line(g_line);
+            // print_cmd(g_cmd);
+            open_pipe();
+            g_sh.status = execute(g_cmd);
+            // printf("%s\n", g_line);
+            close_pipe();
+            ft_cmd_clear(&g_cmd);
+            free(g_line);
+            if (c)
+                break ;
+        }
+        r = 0;
     }
     return(g_sh.status);
 }

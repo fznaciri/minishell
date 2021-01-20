@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:21 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/11 09:54:38 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/20 10:21:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,6 @@ int                 ft_strchrn(char *s, char c);
 int                 ft_tab_min(int tab[], int i);
 char    *ft_strappend(char *str, char c);
 int		ft_strcmp(const char *s1, const char *s2);
+char     *ft_strnchr(char *s, char *set);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 17:56:58 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/20 11:19:14 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ char *builtins_str[BUILTINS_NUM];
 //prompt
 void prompt();
 
+//error
+int ft_err(char *s, int i);
+
 //treat line
 void    treat_line(char *line);
 char    *opr(char *s);
@@ -44,6 +47,8 @@ int     arg_num(char **arg);
 char    **ft_argtrim(char **arg, char *set);
 char    *restruct_line(char *l);
 void wrap_exec(t_cmd **cmd);
+int    check_syntax(char *line);
+
 //print
 void    print_cmd(t_cmd *cmd);
 void    print_arg(char **arg);
@@ -73,6 +78,7 @@ void        add_env(char *s);
 char        *extract_env(char *s);
 void        replace_env(char *s);
 void        remove_env(char *s);
+int         check(char *env);
 
 //execution
 int         exec(t_cmd cmd);
