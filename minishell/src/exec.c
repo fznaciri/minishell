@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 23:38:55 by mac              ###   ########.fr       */
+/*   Updated: 2021/01/21 12:44:05 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int exec(t_cmd cmd)
         if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
         {
             err = errno;
-            ft_putstr_fd("-bash ", 2);
+            ft_putstr_fd("minishell: ", 2);
             ft_putstr_fd(cmd.cmd, 2);
             dir = opendir(cmd.cmd);
             if (dir)
@@ -104,7 +104,7 @@ void    setup_red(t_cmd *cmd)
             cmd->fd_in = open(red->file, O_RDONLY, S_IRWXU);
         if (cmd->fd_in < 0 || cmd->fd_out< 0)
         {
-            ft_putstr_fd("-bash ", 2);
+            ft_putstr_fd("minishell: ", 2);
             ft_putstr_fd(red->file, 2);
             ft_putstr_fd(": ", 2);
             ft_putendl_fd(strerror(errno), 2);

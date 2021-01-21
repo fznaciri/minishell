@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/20 12:22:39 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/21 12:50:18 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void inc_shlvl()
     char *s;
     char *v;
 
+    i = 0;
     v = ft_getenv("SHLVL");
     if (v)
         i = ft_atoi(ft_getenv("SHLVL"));
@@ -33,14 +34,29 @@ void inc_shlvl()
         i = ft_atoi(ft_strdup(""));
     i++;
     s = ft_strjoin("SHLVL=", ft_itoa(i));
-    replace_env(s);
+    if (!v)
+        add_env(s);
+    else
+        replace_env(s);
+}
+
+void set_env()
+{
+    char * pwd;
+    if (!(pwd = ft_getenv("PWD")))
+    {
+        if(!(pwd = getcwd(NULL, 0)))
+            pwd = ft_strdup("");
+        pwd = ft_strjoin("PWD=", pwd);
+        add_env(pwd);
+    }
 }
 
 int main(int ac, char **av, char **env)
 {
     int i = 0;
     int status;
-    int r;
+    // int r;
     int c;
     
     g_sh.in = dup(0);
@@ -48,6 +64,8 @@ int main(int ac, char **av, char **env)
     status = 1; 
     init_env(env);
     inc_shlvl();
+    remove_env("OLDPWD");
+    set_env();
     init_builtins();
     signal(SIGINT,sig_handler);
     signal(SIGQUIT,sig_handler);
@@ -63,10 +81,10 @@ int main(int ac, char **av, char **env)
             prompt();
             gnl(0, &g_line);
         }
-        if ((r = check_syntax(g_line)))
-            g_sh.status = r;
-        if (!r)
-        {
+        // if ((r = check_syntax(g_line)))
+        //     g_sh.status = r;
+        // if (!r)
+        // {
             treat_line(g_line);
             // print_cmd(g_cmd);
             open_pipe();
@@ -77,8 +95,8 @@ int main(int ac, char **av, char **env)
             free(g_line);
             if (c)
                 break ;
-        }
-        r = 0;
+        // }
+        // r = 0;
     }
     return(g_sh.status);
 }
