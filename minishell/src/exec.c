@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 12:02:41 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 16:32:43 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int exec(t_cmd cmd)
             }
             else
             {
-                ft_putstr_fd(" ", 2);
+                ft_putstr_fd(": ", 2);
                 ft_putendl_fd(strerror(err), 2);
             }
             exit(126);

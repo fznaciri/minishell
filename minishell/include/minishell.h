@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 12:42:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 16:11:38 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void prompt();
 
 //error
 int ft_err(char *s, int i);
+int is_special(char *env);
 
 //treat line
 void    treat_line(char *line);
