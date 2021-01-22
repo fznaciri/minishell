@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/20 09:31:05 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:42:54 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int   cmd_export(char **arg)
     int n;
     char *env;
     char *var;
+    int j;
     
     if (arg_num(arg) == 1)
     {
@@ -47,15 +48,33 @@ int   cmd_export(char **arg)
     {
         if (arg[i][0] == '=')
         {
-            ft_putstr_fd("bash: export: ",2);
+            ft_putstr_fd("minishell: export: ",2);
             ft_putstr_fd(arg[i], 2);
-            ft_putstr_fd(" : not a valid identifier\n", 2);
+            ft_putstr_fd(": not a valid identifier\n", 2);
             return 1;
         }
         env = extract_env(arg[i]);
+        j = 0;
+        while (env[j])
+        {
+            if (SPECIAL(env[j]) || env[j] == ' ')
+            {
+                ft_putstr_fd("minishell: export: ",2);
+                ft_putchar_fd('`', 2);
+                ft_putstr_fd(arg[i], 2);
+                ft_putchar_fd('\'', 2);
+                ft_putstr_fd(": not a valid identifier\n", 2);
+                return 1;
+            }
+            j++;
+        }
         if (env && ft_isdigit(env[0]))
         {
-            ft_putstr_fd("bash: export: not a valid identifier\n", 2);
+            ft_putstr_fd("minishell: export: ",2);
+            ft_putchar_fd('`', 2);
+            ft_putstr_fd(arg[i], 2);
+            ft_putchar_fd('\'', 2);
+            ft_putstr_fd(": not a valid identifier\n", 2);
             return 1;
         }
         if (ft_getenv(env))

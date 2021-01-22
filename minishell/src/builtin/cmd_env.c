@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 13:56:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/17 11:38:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 11:28:43 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int cmd_env(char **arg)
     i = 0;
     while(g_sh.env[i])
     {
-        ft_putstr_fd(g_sh.env[i], 1);
-        write(1, "\n", 1);
+        if (ft_strchr(g_sh.env[i], '='))
+            ft_putendl_fd(g_sh.env[i], 1);
         i++;
     }
     return(0);

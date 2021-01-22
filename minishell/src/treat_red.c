@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/19 11:08:04 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 10:51:19 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,52 +63,51 @@ char  *extract(char *s, char *set)
     return (ft_strndup(s, i));
 }
 
-char    *remove_red(char *cmd)
-{
-    int s;
-    int len;
-    char *new;
+// char    *remove_red(char *cmd)
+// {
+//     int s;
+//     int len;
+//     char *new;
     
-    len = ft_redcount(cmd, (int)ft_strlen(cmd));
-    s = ft_strnchrn(cmd, "><");
-    new = ft_strndup(cmd, s);
-    new = ft_strjoin(new, cmd + len + s);
-    return new;
-}
+//     len = ft_redcount(cmd, (int)ft_strlen(cmd));
+//     s = ft_strnchrn(cmd, "><");
+//     new = ft_strndup(cmd, s);
+//     new = ft_strjoin(new, cmd + len + s);
+//     return new;
+// }
 
-/* int     ft_redcount(char *cmd, int l)
+char    *remove_red(char *cmd)
 {
     int i;
     int j;
-    int r;
     int len;
+    char *new;
+    
+    new = malloc(ft_strlen(cmd) + 1);
     i = 0;
     j = 0;
-    r = 0;
-    while (i < l)
+    while (cmd[i])
     {
-        if (cmd[i] == '>' && cmd[i + 1] == '>')
+        if (cmd[i] == '>' && cmd[i] == '>')
         {
-            j = j + 2;
+            i += 2;
+            i += ft_strlen(extract(cmd + i + 1, " ><|;"));
+        }
+        else if (cmd[i] == '<' || cmd[i] == '>')
+        {
             i++;
-            r = 1;
+            i += ft_strlen(extract(cmd + i + 1, " ><|;"));
         }
-        else if (cmd[i] == '>' || cmd[i] == '<')
+        else
         {
+            new[j] = cmd[i];
             j++;
-            r = 1;
         }
-        if (r)
-        {
-            len = ft_strlen(extract(cmd + i + 1, " ><;|"));
-            j = j + len + (ft_strnchrn(cmd + i + 1 + len, "><") ? ft_count_space(cmd + i + 1 + len) : 0);
-            i = i + j - 1;
-        }
-        r = 0;
         i++;
     }
-    return j;
-} */
+    new[j] = 0;
+    return new;
+}
 
 int     ft_redcount(char *cmd, int l)
 {

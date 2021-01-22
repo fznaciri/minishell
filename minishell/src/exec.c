@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/21 12:44:05 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:02:41 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int     execute(t_cmd *cmd)
     while (cmd)
     {
         wrap_exec(&cmd);
-        // print_cmd(&cmd);
+        // print_cmd(cmd);
         setup_pipe(cmd);
         setup_red(cmd);
         i = 0;
@@ -120,28 +120,6 @@ void    setup_red(t_cmd *cmd)
     if (cmd->fd_out)
         dup2(cmd->fd_out, 1);
 }
-
-// void wrap_exec(t_cmd **cmd)
-// {
-//     int i;
-
-//     i = 0;
-//     (*cmd)->cmd = restruct_line((*cmd)->cmd);
-//     // printf("|%s|\n", (*cmd)->cmd);
-//     while ((*cmd)->arg[i])
-//     {
-//         (*cmd)->arg[i] = restruct_line((*cmd)->arg[i]);
-//         printf("|%d:%s|\n", i, (*cmd)->arg[i]);     
-//         if ((*cmd)->arg[i])
-//         {
-//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\\');
-//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '\'');
-//             (*cmd)->arg[i] = ft_strremove((*cmd)->arg[i], '"');
-//         }    
-//         printf("|%d:%s|\n", i, (*cmd)->arg[i]);
-//         i++;
-//     }
-// }
 
 void    wrap_exec(t_cmd **cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/21 11:27:46 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/22 12:42:34 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #include <dirent.h>
 
 # define BUILTINS_NUM 7
-
+# define SPECIAL(c) (c == '!' || c == '@' || c == '$' || c == '\\' || c == '|' || c == ';' || c == '&')
 int (*builtins[BUILTINS_NUM])(char **);
 char *builtins_str[BUILTINS_NUM];
 
