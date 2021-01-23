@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 11:59:58 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 18:44:01 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,16 @@ char    *restruct_line(char *l)
                 line = ft_strjoin(line, ft_itoa(g_sh.status));
                 i++;
             }
-            else if (!ft_isalpha(l[i + 1]) || ft_isdigit(l[i + 1]) || l[i + 1] == '=')
-            {
-                if (ft_isdigit(l[i + 1]))
-                    i += 2;
-                line = ft_strappend(line, l[i]);
-            }
+            // else if ((!ft_isalpha(l[i + 1]) || ft_isdigit(l[i + 1]) || l[i + 1] == '=')
+            // {
+            //     printf("hi\n");
+            //     if (ft_isdigit(l[i + 1]))
+            //         i += 2;
+            //     line = ft_strappend(line, l[i]);
+            // }
             else
             {
-                v = extract(l + i + 1, "\"$= ");
+                v = extract(l + i + 1, "\"$= |@,");
                 if (v)
                 {
                     line = ft_strjoin(line, ft_getenv(v));

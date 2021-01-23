@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 12:06:33 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 17:01:55 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int     execute(t_cmd *cmd)
     while (cmd)
     {
         wrap_exec(&cmd);
-        // print_cmd(cmd);
+        // print_arg(cmd->arg);
         setup_pipe(cmd);
         setup_red(cmd);
         i = 0;

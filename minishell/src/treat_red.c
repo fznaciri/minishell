@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 10:51:19 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 15:30:09 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,6 @@ char  *extract(char *s, char *set)
     return (ft_strndup(s, i));
 }
 
-// char    *remove_red(char *cmd)
-// {
-//     int s;
-//     int len;
-//     char *new;
-    
-//     len = ft_redcount(cmd, (int)ft_strlen(cmd));
-//     s = ft_strnchrn(cmd, "><");
-//     new = ft_strndup(cmd, s);
-//     new = ft_strjoin(new, cmd + len + s);
-//     return new;
-// }
 
 char    *remove_red(char *cmd)
 {
