@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 16:45:35 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 12:06:33 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int     execute(t_cmd *cmd)
             }    
             i++;
         }
-        if (!built && cmd->cmd)
+        if (!built && cmd->cmd && !ft_is_empty(cmd->cmd))
             g_sh.status = exec(*cmd);
         built = 0;
         reset_std();

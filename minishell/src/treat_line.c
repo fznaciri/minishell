@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 10:35:49 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 11:59:58 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ void    treat_line(char *line)
         red = treat_red(pipeline[i]); 
         op = opr(pipeline[i]);
         pipeline[i] =  remove_red(pipeline[i]);
-        s = ft_splitt(pipeline[i], "  ");
+        s = ft_splitt(pipeline[i], "  \t");
         if (op)
             s = remove_arg(s, op);
         // s = ft_argtrim(s, "\"'");
+        if (!(s[0]))
+            s[0] = ft_strdup("");
+        else if (ft_is_empty(s[0]) && s[1])
+            s = s + 1;
         cmd = ft_cmd_new(ft_strtrim(get_path(s[0]), " "), s, op);
         cmd->red = red;
         ft_cmd_add_back(&g_cmd, cmd);

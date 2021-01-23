@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 18:19:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/16 17:50:07 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/23 11:51:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char    *get_path(char *s)
     int i;
 
     i = 0;
-    if (s[0] == '.' || is_builtins(s) || !ft_getenv("PATH"))
+    if (s[0] == '.' || is_builtins(s) || !ft_getenv("PATH") || ft_is_empty(s))
         return (ft_strdup(s));
     path = ft_split(ft_getenv("PATH"), ':');
     while (path[i])
