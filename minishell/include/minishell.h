@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 15:43:03 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/24 11:58:34 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void        replace_env(char *s);
 void        remove_env(char *s);
 int         check(char *env);
 void        set_env();
+void    set_lastcmd();
 
 //execution
 int         exec(t_cmd cmd);

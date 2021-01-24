@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 17:02:00 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/24 12:09:51 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ void set_env()
     }
 }
 
+void    set_lastcmd()
+{
+    t_cmd *cmd;
+    char *s;
+    
+    cmd = ft_cmd_last(g_cmd);
+    s = ft_strjoin("_=", ft_strdup(cmd->cmd));
+    replace_env(s);
+}
+
 int main(int ac, char **av, char **env)
 {
     int i = 0;
@@ -90,6 +100,8 @@ int main(int ac, char **av, char **env)
             // printf("--------------\n");
             open_pipe();
             g_sh.status = execute(g_cmd);
+            if (!g_cmd->next)
+                set_lastcmd();
             // printf("%s\n", g_line);
             close_pipe();
             ft_cmd_clear(&g_cmd);
