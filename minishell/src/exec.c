@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 17:01:55 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/25 22:22:37 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void    setup_red(t_cmd *cmd)
             ft_putstr_fd(red->file, 2);
             ft_putstr_fd(": ", 2);
             ft_putendl_fd(strerror(errno), 2);
+            g_sh.status = 1;
         }
         if (red->next && cmd->fd_out && red->next->red_type[0] != '<')
             close(cmd->fd_out);

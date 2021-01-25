@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 15:30:09 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/25 22:32:38 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_red    *treat_red(char *pipeline)
 {
     int i;
+    char *file;
     char *red_type;
     t_red *red;
     t_red *red_list;
@@ -24,6 +25,13 @@ t_red    *treat_red(char *pipeline)
     red_type = NULL;
     while (pipeline[i])
     {
+        if (pipeline[i] == '"')
+        {
+            i++;
+            while (pipeline[i] != '"')
+                i++;
+            i++;
+        }
         if (pipeline[i] == '>' && pipeline[i + 1] == '>')
         {   
             red_type = ft_strdup(">>");
@@ -35,7 +43,11 @@ t_red    *treat_red(char *pipeline)
             red_type = ft_strdup(">");
         if (red_type)
         {
-            red = ft_red_new(red_type, ft_strtrim(extract(pipeline + i + 1, " ><;|"), " "));
+            file = extract(pipeline + i + 1, " ><;|");
+            file = ft_strtrim(file, " ");
+            file = ft_strremove(file, '\'');
+            file = ft_strremove(file, '"');
+            red = ft_red_new(red_type, file);
             ft_red_add_back(&red_list, red);
         }
         red_type = NULL;

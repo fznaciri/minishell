@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:14:23 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 16:32:45 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/25 22:52:05 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    init_env(char **env)
 
     i = 0;
     n = arg_num(env);
-    g_sh.env = malloc(sizeof(char *) * (n + 1));
+    g_sh.env = malloc(sizeof(char*) * (n + 1));
     while (env[i])
     {
         g_sh.env[i] = ft_strdup(env[i]);
