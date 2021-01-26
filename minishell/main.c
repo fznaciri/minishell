@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 14:41:28 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 15:22:55 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void    set_lastcmd(t_cmd *cmd)
     
     if (!ft_strcmp(cmd->cmd, "echo") && ft_argcmp(cmd->arg, "$_") && cmd->prev)
         lcmd = cmd->prev;
-    else if (!ft_strcmp(cmd->cmd, "echo") && !ft_strcmp(cmd->arg[1], "$_"))
+    else if (!ft_strcmp(cmd->cmd, "echo") && !ft_argcmp(cmd->arg, "$_"))
         lcmd = NULL;
     else
         lcmd = cmd;
