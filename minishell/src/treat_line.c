@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/23 18:44:01 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 12:47:40 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void    treat_line(char *line)
     t_cmd *cmd;
     t_red *red;
     char *op;
+    char *path;
     int j;
     
     j = 0;
@@ -42,7 +43,11 @@ void    treat_line(char *line)
             s[0] = ft_strdup("");
         else if (ft_is_empty(s[0]) && s[1])
             s = s + 1;
-        cmd = ft_cmd_new(ft_strtrim(get_path(s[0]), " "), s, op);
+        path = get_path(s[0]);
+        path = ft_strtrim(path, " ");
+        path = ft_strremove(path, '\'');
+        path = ft_strremove(path, '"');
+        cmd = ft_cmd_new(path, s, op);
         cmd->red = red;
         ft_cmd_add_back(&g_cmd, cmd);
         i++;
@@ -135,7 +140,6 @@ char    *restruct_line(char *l)
             line = ft_strappend(line, l[i]);
         i++;
     }
-    // printf("line: %s\n", line);
     return (line);
 }
 

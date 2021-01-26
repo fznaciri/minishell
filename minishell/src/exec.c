@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/25 22:22:37 by mac              ###   ########.fr       */
+/*   Updated: 2021/01/26 12:47:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int     execute(t_cmd *cmd)
     built = 0;
     while (cmd)
     {
+        if (cmd->cmd && !cmd->next)
+            set_lastcmd(cmd);
         wrap_exec(&cmd);
         // print_arg(cmd->arg);
         setup_pipe(cmd);
@@ -152,5 +154,6 @@ void    wrap_exec(t_cmd **cmd)
         i++;
     }
     arg[j] = NULL;
+    // print_arg(arg);
     (*cmd)->arg = arg;
 }

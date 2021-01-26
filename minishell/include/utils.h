@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:21 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/21 12:17:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 12:58:51 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ char    *ft_strappend(char *str, char c);
 int		ft_strcmp(const char *s1, const char *s2);
 char     *ft_strnchr(char *s, char *set);
 int     ft_is_empty(char *s);
+int ft_argcmp(char **arg, char *s);
 #endif

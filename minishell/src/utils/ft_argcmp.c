@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   ft_argcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 13:56:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 12:49:54 by fnaciri-         ###   ########.fr       */
+/*   Created: 2021/01/26 12:55:51 by fnaciri-          #+#    #+#             */
+/*   Updated: 2021/01/26 12:58:46 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/utils.h"
 
-int cmd_env(char **arg)
+int ft_argcmp(char **arg, char *s)
 {
     int i;
 
     i = 0;
-    replace_env(ft_strdup("_=env"));
-    while(g_sh.env[i])
+    while (arg[i])
     {
-        if (ft_strchr(g_sh.env[i], '='))
-            ft_putendl_fd(g_sh.env[i], 1);
+        if (ft_strnstr(arg[i], s , ft_strlen(arg[i])))
+            return 1;
         i++;
     }
-    return(0);
+    return 0;
 }

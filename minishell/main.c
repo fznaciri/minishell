@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/25 23:04:15 by mac              ###   ########.fr       */
+/*   Updated: 2021/01/26 12:58:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,28 @@ void set_env()
     }
 }
 
-void    set_lastcmd()
+void    set_lastcmd(t_cmd *cmd)
 {
-    t_cmd *cmd;
+    t_cmd *lcmd;
     char *s;
+    int n;
     
-    cmd = ft_cmd_last(g_cmd);
-    s = ft_strjoin("_=", ft_strdup(cmd->cmd));
-    replace_env(s);
+    if (!ft_strcmp(cmd->cmd, "echo") && ft_argcmp(cmd->arg, "$_") && cmd->prev)
+        lcmd = cmd->prev;
+    else if (!ft_strcmp(cmd->cmd, "echo") && !ft_strcmp(cmd->arg[1], "$_"))
+        lcmd = NULL;
+    else
+        lcmd = cmd;
+    if (lcmd)
+    {
+        n = arg_num(lcmd->arg);
+        if (lcmd->prev && lcmd->prev->op && !ft_strcmp(lcmd->prev->op, "|"))
+            s = ft_strjoin("_=", ft_strdup(""));
+        else
+            s = ft_strjoin("_=", ft_strdup(lcmd->arg[n - 1]));
+        remove_env("_");
+        add_env(s);
+    }
 }
 
 int main(int ac, char **av, char **env)
@@ -100,8 +114,6 @@ int main(int ac, char **av, char **env)
             // printf("--------------\n");
             open_pipe();
             g_sh.status = execute(g_cmd);
-            if (!g_cmd->next)
-                set_lastcmd();
             // printf("%s\n", g_line);
             close_pipe();
             ft_cmd_clear(&g_cmd);
