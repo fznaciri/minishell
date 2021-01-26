@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 15:22:55 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 18:50:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ void inc_shlvl()
 
     i = 0;
     v = ft_getenv("SHLVL");
-    if (v)
-        i = ft_atoi(ft_getenv("SHLVL"));
-    else
-        i = ft_atoi(ft_strdup(""));
+    i = ft_atoi(v ? ft_getenv("SHLVL") : ft_strdup(""));
+    if (i >= 2147483647 || i < 0)
+        i = -1;
+    if (i >= 200000)
+    {
+        ft_putstr_fd("minishell: warning: shell level (", 2);
+        ft_putstr_fd(ft_itoa(i + 1), 2);
+        ft_putendl_fd(") too high, resetting to 1", 2);
+        i = 0;
+    }
     i++;
     s = ft_strjoin("SHLVL=", ft_itoa(i));
     if (!v)
