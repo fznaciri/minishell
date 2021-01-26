@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2020/12/17 12:03:57 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:39:29 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_sh
     pid_t pid;
     int in;
     int out;
+    char *errors[10];
 } t_sh;
 
 t_sh    g_sh;

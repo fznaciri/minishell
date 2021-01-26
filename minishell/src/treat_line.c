@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 12:47:40 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:46:28 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,112 @@ void    treat_line(char *line)
     }
 }
 
-int   check_syntax(char *line)
+// int   check_syntax(char *line)
+// {
+//     int i;
+//     int n;
+
+//     i = 0;
+//     n = ft_strlen(line);
+//     while (line[i])
+//     {
+//         while (line[i] == ' ')
+//             i++;
+//         if (ft_strnchr(line, "|;"))
+//              return (ft_err("bash: syntax error near unexpected token `|'", 258));
+//         if (ft_strnchr(line, ";|")) 
+//             return (ft_err("bash: syntax error near unexpected token `|'",258));
+//         if ((ft_strnchr(line, ";;")))
+//             return (ft_err("bash: syntax error near unexpected token `;;'",258));
+//         if (ft_strnchr(line, "><"))
+//             return (ft_err("bash: syntax error near unexpected token `>'",258));
+//         if (ft_strnchr(line, "||"))
+//             return (ft_err("bash: syntax error near unexpected token `|'",258));
+//         if (ft_strnchrn(line, ">>>"))
+//             return (ft_err("bash: syntax error near unexpected token `>'",258));
+//         i++;
+//     }
+//     return 0;
+// }
+
+
+char    *check_syntax()
+{
+    int r;
+    g_sh.errors[1] = ft_strdup("minishell: syntax error near unexpected token `|'");
+    g_sh.errors[2] = ft_strdup("minishell: syntax error near unexpected token `;'");
+    g_sh.errors[3] = ft_strdup("minishell: syntax error near unexpected token `||'");
+    g_sh.errors[4] = ft_strdup("minishell: syntax error near unexpected token `;;'");
+    g_sh.errors[5] = ft_strdup("minishell: syntax error near unexpected token `|;'");
+    g_sh.errors[6] = ft_strdup("minishell: syntax error near unexpected token `;|'");
+    g_sh.errors[7] = ft_strdup("minishell: syntax error near unexpected token `<<'");
+    g_sh.errors[8] = ft_strdup("minishell: syntax error near unexpected token `>'");
+    g_sh.errors[9] = ft_strdup("minishell: syntax error near unexpected token `newline'");
+    if ((r = check_pipe()))
+        return g_sh.errors[r];
+    if ((r = check_red()))
+        return g_sh.errors[r];
+    // if ((r = check_quote()))
+    //     return g_sh.errors[r];
+    return NULL;
+}
+int     check_pipe()
+{
+    int l;
+    l = 0;
+    while (g_line[l] == ' ')
+        l++;
+    if (g_line[l] == '|')
+        return 1;
+    else if (g_line[l] == ';')
+        return 2;
+    l = ft_strlen(g_line);
+    l--;
+    while (g_line[l])
+    {
+        if (g_line[l] == ' ')
+            l--;
+        if (g_line[l] == '|')
+            return 1;
+        else
+            break ;
+    }
+    if (ft_strnchr(g_line, "||"))
+        return 3;
+    if (ft_strnchr(g_line, ";;"))
+        return 4; 
+    if (ft_strnchr(g_line, "|;"))
+        return 5;
+    if (ft_strnchr(g_line, ";|"))
+        return 6;
+    return 0;
+}
+int     check_red()
 {
     int i;
-    int n;
-
+    if (ft_strnchr(g_line, "<<"))
+        return 7;
+    if (ft_strnchr(g_line, ">>>"))
+        return 8;
     i = 0;
-    n = ft_strlen(line);
-    while (line[i])
+    while (g_line[i])
     {
-        while (line[i] == ' ')
+        if (g_line[i] == '>' && g_line[i + 1] == '>')
+        {
+            i+= 2;
+            while (g_line[i] == ' ')
+                i++;
+            if (SPECIAL(g_line[i]) || !g_line[i])
+                return 9;
+        }
+        else if (g_line[i] == '>' || g_line[i] == '<')
+        {
             i++;
-        if (ft_strnchr(line, "|;"))
-             return (ft_err("bash: syntax error near unexpected token `|'", 258));
-        if (ft_strnchr(line, ";|")) 
-            return (ft_err("bash: syntax error near unexpected token `|'",258));
-        if ((ft_strnchr(line, ";;")) || line[i] == ';')
-            return (ft_err("bash: syntax error near unexpected token `;;'",258));
-        if (ft_strnchr(line, "><")  || line[i] == '>' || line[i] == '<')
-            return (ft_err("bash: syntax error near unexpected token `>'",258));
-        if (ft_strnchr(line, "||")  || line[i] == '|')
-            return (ft_err("bash: syntax error near unexpected token `|'",258));
-        if (ft_strnchrn(line, ">>>"))
-            return (ft_err("bash: syntax error near unexpected token `>'",258));
+            while (g_line[i] == ' ')
+                    i++;
+            if (SPECIAL(g_line[i]) || !g_line[i])
+                return 9;
+        }
         i++;
     }
     return 0;

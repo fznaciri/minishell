@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/24 11:58:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:42:28 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ int     arg_num(char **arg);
 char    **ft_argtrim(char **arg, char *set);
 char    *restruct_line(char *l);
 void wrap_exec(t_cmd **cmd);
-int    check_syntax(char *line);
+// int    check_syntax(char *line);
+char    *check_syntax();
+int     check_pipe();
+int     check_red();
 
 //print
 void    print_cmd(t_cmd *cmd);
