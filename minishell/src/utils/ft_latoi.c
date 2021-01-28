@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atol.c                                          :+:      :+:    :+:   */
+/*   ft_latoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 18:37:08 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 18:38:18 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/28 18:12:13 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/utils.h"
 
-long		ft_atol(const char *str)
+long		ft_latoi(const char *str)
 {
 	int		i;
 	int		signe;
-	unsigned long	n;
+	unsigned long long	n;
 
 	i = 0;
 	signe = 1;
@@ -32,9 +32,7 @@ long		ft_atol(const char *str)
 	while (str[i] >= 48 && str[i] <= 57 && str[i] != '\0')
 	{
 		n = n * 10 + str[i] - 48;
-		// if (n > 9223372036854775807)
-		// 	return ((signe > 0) ? -1 : 0);
 		i++;
 	}
-	return ((long)(n * signe));
+	return ((long long)(n * signe));
 }

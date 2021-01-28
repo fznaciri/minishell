@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:12:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/28 17:44:27 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/28 18:45:35 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int		cmd_echo(char **arg)
 	return (0);
 }
 
-void skip_spaces(char *s)
+char *skip_spaces(char *s)
 {
 	int i;
 
 	i = 0;
     while (s[i] && is_space(s[i]))
 			i++;
+	return (s + i);
 }
 
 int is_space(char c)

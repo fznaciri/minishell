@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/28 17:41:19 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/28 18:20:45 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void    print_arg(char **arg);
 
 //spaces
 int         is_space(char c);
-void        skip_spaces(char *s);
+char        *skip_spaces(char *s);
 int         ft_count_space(char *s);
 
 // builtins
