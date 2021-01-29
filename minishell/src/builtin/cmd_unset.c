@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:09:31 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/22 16:20:14 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/01/29 19:03:53 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 int   cmd_unset(char **arg)
 {
     int i;
-
-    i = 0;
+    int ret;
+    
+    ret = 0;
+    i = 1;
     while (arg[i])
     {
-        if (!is_special(arg[i]))
-            remove_env(arg[i]);
+        if (is_special(arg[i]))
+            ret = 1;
         else
-            return 1;
+            remove_env(arg[i]);
+        // else
+        //     return 1;
         i++;
     }
-    return (0);    
+    return (ret);    
 }
 
 void    remove_env(char *s)
@@ -56,19 +60,31 @@ int is_special(char *env)
     int l;
     
     j = 0;
-    l = ft_strlen(env);
-    while (env[j])
+    if (ft_is_empty(env))
     {
-        if (SPECIAL(env[j]) || env[j] == ' ' || env[l - 1] == '=')
+        ft_putstr_fd("minishell: unset: ",2);
+        ft_putchar_fd('`', 2);
+        ft_putstr_fd(env, 2);
+        ft_putchar_fd('\'', 2);
+        ft_putstr_fd(": not a valid identifier\n", 2);
+        return 1;
+    }
+    else
+    {
+        l = ft_strlen(env);
+        while (env[j])
         {
-            ft_putstr_fd("minishell: unset: ",2);
-            ft_putchar_fd('`', 2);
-            ft_putstr_fd(env, 2);
-            ft_putchar_fd('\'', 2);
-            ft_putstr_fd(": not a valid identifier\n", 2);
-            return 1;
+            if (SPECIAL(env[j]) || env[j] == ' ' || env[l - 1] == '=')
+            {
+                ft_putstr_fd("minishell: unset: ",2);
+                ft_putchar_fd('`', 2);
+                ft_putstr_fd(env, 2);
+                ft_putchar_fd('\'', 2);
+                ft_putstr_fd(": not a valid identifier\n", 2);
+                return 1;
             }
-        j++;
+            j++;
+        }  
     }
     return 0;
 }
