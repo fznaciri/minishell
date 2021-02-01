@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/28 18:32:27 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/01 18:39:55 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,34 @@ int exec(t_cmd cmd)
         if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
         {
             err = errno;
-            ft_putstr_fd("minishell: ", 2);
-            ft_putstr_fd(cmd.cmd, 2);
             dir = opendir(cmd.cmd);
             if (dir)
             {
                 closedir(dir);
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd.cmd, 2);
                 ft_putendl_fd(": is a directory", 2);
+                exit(126);
             }
             else if (err == 2)
             {
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd.cmd, 2);
                 ft_putstr_fd(": command not found\n", 2);
                 exit(127);
             }
-            else
+            else if (err != 8)
             {
                 // ft_putstr_fd(": ", 2);
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd.cmd, 2);
                 ft_putendl_fd(": Permission denied", 2);
                 // ft_putendl_fd(strerror(err), 2);
+                // printf("%d\n", err);
+                exit(126);
             }
-            exit(126);
         }
+        exit(0);
     }
     close(cmd.pipe[1]);
     waitpid(g_sh.pid, &status, 0);
@@ -70,20 +77,24 @@ int     execute(t_cmd *cmd)
         // print_arg(cmd->arg);
         setup_pipe(cmd);
         setup_red(cmd);
-        i = 0;
-        while (i < BUILTINS_NUM && cmd->cmd)
+        if (!g_sh.error && cmd->cmd)
         {
-            if (!strcmp(cmd->cmd, builtins_str[i]))
+            i = 0;
+            while (i < BUILTINS_NUM && cmd->cmd)
             {
-                g_sh.status = (*builtins[i])(cmd->arg);
-                close(cmd->pipe[1]);
-                built = 1;
-            }    
-            i++;
+                if (!strcmp(cmd->cmd, builtins_str[i]))
+                {
+                    g_sh.status = (*builtins[i])(cmd->arg);
+                    close(cmd->pipe[1]);
+                    built = 1;
+                }    
+                i++;
+            }
+            if (!built && cmd->cmd && !ft_is_empty(cmd->cmd))
+                g_sh.status = exec(*cmd);
         }
-        if (!built && cmd->cmd && !ft_is_empty(cmd->cmd))
-            g_sh.status = exec(*cmd);
         built = 0;
+        g_sh.error = 0;
         reset_std();
         cmd = cmd->next;
     }  
@@ -107,6 +118,7 @@ void    setup_red(t_cmd *cmd)
             cmd->fd_in = open(red->file, O_RDONLY, S_IRWXU);
         if (cmd->fd_in < 0 || cmd->fd_out< 0)
         {
+            g_sh.error = 1;
             ft_putstr_fd("minishell: ", 2);
             ft_putstr_fd(red->file, 2);
             ft_putstr_fd(": ", 2);

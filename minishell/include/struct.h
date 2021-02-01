@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 14:39:29 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/01 18:30:30 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_sh
     int in;
     int out;
     char *errors[10];
+    int error;
 } t_sh;
 
 t_sh    g_sh;

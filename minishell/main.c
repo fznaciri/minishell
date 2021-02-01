@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/26 18:50:30 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/01 18:40:08 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int main(int ac, char **av, char **env)
     
     g_sh.in = dup(0);
     g_sh.out = dup(1);
-    status = 1; 
+    status = 1;
     init_env(env);
     inc_shlvl();
     remove_env("OLDPWD");
