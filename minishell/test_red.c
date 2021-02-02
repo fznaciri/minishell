@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 11:38:41 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/04 10:28:10 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:26:22 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_red    *treat_red(char *pipeline)
     int i;
     char *red_type;
     t_red *red;
-    t_red *red_list
+    t_red *red_list;
     i = 0;
     while (pipeline[i])
     {
@@ -27,13 +27,15 @@ t_red    *treat_red(char *pipeline)
             red_type = ft_strdup(">");
         if (pipeline[i] == '>>')
             red_type = ft_strdup(">>");
+        if (red_type)
+        {
+            red = ft_red_new(red_type, extract(pipeline + i + 1));
+            ft_red_add_back(&red_list, red);
+        }
+        red_type = NULL;
+        i++;
     }
-    if (red_type)
-    {
-        red = ft_red_new(red_type; extract(pipeline + i + 1));
-        ft_red_add_back(&red_list, red);
-    }
-    return (red_list)
+    return (red_list);
 }
 
 char  *extract(char *s)

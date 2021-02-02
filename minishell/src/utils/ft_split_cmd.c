@@ -95,50 +95,37 @@
 
 #include "../../include/minishell.h"
 
-int		is_specialcar(char c)
-{
-	if (c == '"' || c == '\'' || c == '|' || c == '$' || c == '~' || c == ';')
-		return 1;
-	return 0;
-}
-
+#include "../../include/minishell.h"
 int     is_seperator(char *s, int i, char *set)
 {
     int j;
-    
     j = 0;
     while (set[j])
     {
-        if (set[j] == s[i])
-		{
-			if (i > 0)
-			{
-				if (s[i - 1 < 0 ? 1 : i - 1] != '\\' || !is_specialcar(s[i]))
-					return 1;
-			}
-		}
+        if (set[j] == s[i] && (s[(i - 1 < 0 ? 1 : i - 1)] != '\\' || !SPECIAL(s[i])))
+			return 1;
         j++;
     }
     return 0;
 }
-
 static		int		ft_wordscount(const char *str, char *set)
 {
 	int		i;
 	int		wc;
 	char	*s;
-
+	int		len;
 	s = (char*)str;
 	i = 0;
 	wc = 0;
+	len = ft_strlen(s);
 	if (!is_seperator(s, i, set))
 		wc++;
-	while (s[i])
+	while (i < len)
 	{
 		if (s[i] == 34 || s[i] == 39)
         {
             i++;
-            while (s[i] != 34 && s[i] != 39)
+            while (s[i] != 34 && s[i] != 39 && s[i] != 0)
                 i++;
         }
 		if (is_seperator(s, i, set) && !is_seperator(s, i + 1, set) && s[i + 1])
@@ -147,19 +134,19 @@ static		int		ft_wordscount(const char *str, char *set)
 	}
 	return (wc);
 }
-
 static	size_t		ft_wordlen(char *s, char *set, int i)
 {
 	int j;
-
+	int len;
 	j = 0;
-	while (!is_seperator(s, i, set) && s[i])
+	len = ft_strlen(s);
+	while (i < len && !is_seperator(s, i, set) && s[i])
 	{
 		if (s[i] == 34 || s[i] == 39)
         {
             i++;
 			j++;
-            while (s[i] != 34 && s[i] != 39)
+            while (s[i] != 34 && s[i] != 39  && s[i] != 0)
 			{
                 i++;
 				j++;
@@ -168,11 +155,10 @@ static	size_t		ft_wordlen(char *s, char *set, int i)
 		j++;
 		i++;
 	}
-	if (is_specialcar(s[i]))
+	if (i < len && SPECIAL (s[i]))
 		j++;
 	return (j);
 }
-
 static	void		*ft_dealocate(char ***tab, int i)
 {
 	while (i >= 0)
@@ -183,7 +169,6 @@ static	void		*ft_dealocate(char ***tab, int i)
 	free(**tab);
 	return (NULL);
 }
-
 char				**ft_splitt(char const *s, char *set)
 {
 	char	**words;
@@ -191,7 +176,6 @@ char				**ft_splitt(char const *s, char *set)
 	int		j;
 	int		wc;
 	size_t	len;
-
 	i = 0;
 	j = 0;
 	wc = 0;

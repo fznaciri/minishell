@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_red.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 10:30:25 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/25 22:32:38 by mac              ###   ########.fr       */
+/*   Updated: 2021/02/02 17:09:50 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ t_red    *treat_red(char *pipeline)
     char *red_type;
     t_red *red;
     t_red *red_list;
-    i = 0;
+    int l;
     
+    i = 0;
+    l = ft_strlen(pipeline);
     red_list = NULL;
     red_type = NULL;
-    while (pipeline[i])
+    while (i < l)
     {
         if (pipeline[i] == '"')
         {
             i++;
-            while (pipeline[i] != '"')
+            while (pipeline[i] && pipeline[i] != '"')
                 i++;
-            i++;
+            //i++;
         }
         if (pipeline[i] == '>' && pipeline[i + 1] == '>')
         {   
