@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/04 16:10:59 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/04 18:49:21 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int exec(t_cmd cmd)
         if (execve(cmd.cmd, cmd.arg , g_sh.env))
         { 
             err = errno;
-            //printf("|%d|\n", errno);
-            if (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || !ft_strchr(cmd.cmd, '/'))
+            // printf("|%d|\n", errno);
+            if (!ft_strchr(cmd.cmd, '/') || (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH"))))
                 path = ft_strjoin("./", path);
             dir = opendir(path);
             if (dir && (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || ft_strchr(cmd.cmd, '/')))
@@ -44,7 +44,6 @@ int exec(t_cmd cmd)
             }
             else if (errno == 13 && (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || ft_strchr(cmd.cmd, '/')))
             {
-                closedir(dir);
                 ft_putstr_fd("minishell: ", 2);
                 ft_putstr_fd(cmd.cmd, 2);
                 ft_putendl_fd(": is a directory", 2);
@@ -170,6 +169,7 @@ void    wrap_exec(t_cmd **cmd)
     while ((*cmd)->arg[i])
     {
         tmp = restruct_line((*cmd)->arg[i]);
+        // printf("arg : |%s|\n", tmp);
         if (tmp)
         {
             arg[j] = tmp;
