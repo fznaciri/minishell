@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/02 17:32:05 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/04 16:10:59 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int exec(t_cmd cmd)
     int   status;
     DIR  *dir;
     int err;
+    char *path;
     
+    path = cmd.cmd;
     if ((g_sh.pid = fork()) == -1) 
     {
         perror("bad fork");
@@ -25,11 +27,14 @@ int exec(t_cmd cmd)
     }
     else if (g_sh.pid == 0)
     {
-        if (execve(cmd.cmd, cmd.arg , g_sh.env) == -1)
-        {
+        if (execve(cmd.cmd, cmd.arg , g_sh.env))
+        { 
             err = errno;
-            dir = opendir(cmd.cmd);
-            if (dir)
+            //printf("|%d|\n", errno);
+            if (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || !ft_strchr(cmd.cmd, '/'))
+                path = ft_strjoin("./", path);
+            dir = opendir(path);
+            if (dir && (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || ft_strchr(cmd.cmd, '/')))
             {
                 closedir(dir);
                 ft_putstr_fd("minishell: ", 2);
@@ -37,11 +42,25 @@ int exec(t_cmd cmd)
                 ft_putendl_fd(": is a directory", 2);
                 exit(126);
             }
-            else if (err == 2)
+            else if (errno == 13 && (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")) || ft_strchr(cmd.cmd, '/')))
+            {
+                closedir(dir);
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd.cmd, 2);
+                ft_putendl_fd(": is a directory", 2);
+                exit(126);
+            }
+            else if (err == 2 || dir)  
             {
                 ft_putstr_fd("minishell: ", 2);
                 ft_putstr_fd(cmd.cmd, 2);
-                ft_putstr_fd(": command not found\n", 2);
+                if (ft_strchr(cmd.cmd, '/'))
+                {
+                    ft_putstr_fd(": ", 2);
+                    ft_putendl_fd(strerror(err), 2);
+                }
+                else
+                    ft_putstr_fd(": command not found\n", 2);
                 exit(127);
             }
             else if (err != 8)
