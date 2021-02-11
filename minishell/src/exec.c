@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/04 18:49:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/11 11:26:35 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,13 +178,13 @@ void    wrap_exec(t_cmd **cmd)
                 arg[j] = ft_strremove(arg[j], '"');
                 arg[j] = ft_strremove(arg[j], '\'');
                 arg[j] = ft_strremove(arg[j], '\\');
-                // printf("arg : %s\n", (*cmd)->arg[i]);
+                // printf("arg : %s\n", (*cmd)->arg[j]);
             }
             j++;
         }
         i++;
     }
     arg[j] = NULL;
-    // print_arg(arg);
     (*cmd)->arg = arg;
+    // print_arg((*cmd)->arg);
 }

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 14:00:32 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/13 15:00:21 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/11 11:26:49 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char    *ft_strremove(char *s, char c)
         l++;
     }
     new[i] = 0;
+            // printf("%s\n", new);
     return new;
 }
