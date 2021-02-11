@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/11 11:26:35 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/11 12:16:00 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,15 @@ int     execute(t_cmd *cmd)
             i = 0;
             while (i < BUILTINS_NUM && cmd->cmd)
             {
-                if (!strcmp(cmd->cmd, builtins_str[i]))
+                if (!ft_strcmp(cmd->cmd, builtins_str[i]))
                 {
-                    g_sh.status = (*builtins[i])(cmd->arg);
+                    if (!(ft_strcmp(cmd->cmd, "export")) && ((cmd->op && cmd->op[0] == '|') || (cmd->prev && cmd->prev->op && cmd->prev->op[0] == '|')))
+                        built = 1;
+                    else
+                        g_sh.status = (*builtins[i])(cmd->arg);
                     close(cmd->pipe[1]);
                     built = 1;
+                    break ;
                 }    
                 i++;
             }
