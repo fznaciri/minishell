@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/11 12:16:00 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:07:24 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int exec(t_cmd cmd)
                 ft_putstr_fd(cmd.cmd, 2);
                 ft_putendl_fd(": is a directory", 2);
                 exit(126);
+            }
+            else if (!ft_getenv("PATH") || ft_is_empty(ft_getenv("PATH")))
+            {
+                ft_putstr_fd("minishell: ", 2);
+                ft_putstr_fd(cmd.cmd, 2);
+                ft_putendl_fd(": No such file or directory", 2);
+                exit(127);
             }
             else if (err == 2 || dir)  
             {
@@ -179,6 +186,7 @@ void    wrap_exec(t_cmd **cmd)
             arg[j] = tmp;
             if (arg[j])
             {
+                arg[j]= ft_putbackslash(arg[j]);
                 arg[j] = ft_strremove(arg[j], '"');
                 arg[j] = ft_strremove(arg[j], '\'');
                 arg[j] = ft_strremove(arg[j], '\\');

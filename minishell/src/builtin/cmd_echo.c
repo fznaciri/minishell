@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 10:12:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/28 18:45:35 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/15 17:06:12 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		cmd_echo(char **arg)
 {
 	int i;
 	int		n;
-
+	char *p;
+	int l;
+	
 	n = 0;
 	i = 1;
 	while (arg[i] && !ft_strncmp(arg[i], "-n", 2))
@@ -28,10 +30,25 @@ int		cmd_echo(char **arg)
 		i--;		
 	while (arg[i + n])
 	{
-		ft_putstr_fd(arg[i + n], 1);
-		if (arg[i + n + 1])
-			write(1, " ", 1);
-		i++;
+		// ft_putstr_fd(arg[i + n], 1);
+		// if (arg[i + n + 1])
+		// 	write(1, " ", 1);
+		// i++;
+		p = ft_strtrim(arg[i + n], " ");
+        l = 0;
+        while (p[l])
+        {
+            while (p[l] && (p[l] == ' ' || p[l] == '\t'))
+                l++;
+            if (l - 1 >= 0 && (p[l - 1] == ' ' || p[l - 1] == '\t'))
+                write(1, " ", 1);
+            if (p[l])
+                write(1, p + l, 1);
+            l++;
+        }
+        if (arg[i + n + 1])
+            ft_putstr_fd(" ", 1);
+        i++;
 	}
 	if (!n)
         write(1, "\n", 1);

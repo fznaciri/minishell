@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 12:08:27 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/29 18:38:02 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:55:39 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ int   cmd_export(char **arg)
     i = 1;
     while (arg[i])
     {
-        if (arg[i][0] == '=')
-        {
-            ft_putstr_fd("minishell: export: ",2);
-            ft_putstr_fd(arg[i], 2);
-            ft_putstr_fd(": not a valid identifier\n", 2);
-            ret = 1;
-        }
+        // if (arg[i][0] == '=')
+        // {
+        //     ft_putstr_fd("minishell: export: ",2);
+        //     ft_putstr_fd(arg[i], 2);
+        //     ft_putstr_fd(": not a valid identifier\n", 2);
+        //     ret = 1;
+        // }
         env = extract_env(arg[i]);
+        // printf("%s\n", arg[i]);
         if (ft_strnchrn(env, " |!;&$@\\'\"") || env[0] == ' ' || ft_is_empty(env))
         {
             ft_putstr_fd("minishell: export: ",2);
@@ -65,7 +66,7 @@ int   cmd_export(char **arg)
             ft_putstr_fd(": not a valid identifier\n", 2);
             ret = 1;
         }
-        if (env && ft_isdigit(env[0]))
+        else if (env && ft_isdigit(env[0]))
         {
             ft_putstr_fd("minishell: export: ",2);
             ft_putchar_fd('`', 2);
@@ -74,9 +75,9 @@ int   cmd_export(char **arg)
             ft_putstr_fd(": not a valid identifier\n", 2);
             ret = 1;
         }
-        if (ft_getenv(env))
+        else if (ft_getenv(env))
             replace_env(arg[i]);
-        else if (!ft_getenv(env))
+        else 
         {
             if (check(env))
                 add_env(arg[i]);

@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/04 17:19:17 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:14:02 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void inc_shlvl()
 void set_env()
 {
     char * pwd;
+    char *s;
+    
     if (!(pwd = ft_getenv("PWD")))
     {
         if(!(pwd = getcwd(NULL, 0)))
@@ -64,6 +66,11 @@ void    set_lastcmd(t_cmd *cmd)
     char *s;
     int n;
     
+    // if (!ft_strcmp(cmd->cmd, "echo") && ft_argcmp(cmd->arg, "$_") && !cmd->prev)
+    // {
+    //     s = ft_strjoin("_=", "/bin/bash");
+    //     add_env(s);
+    // }    
     if (!ft_strcmp(cmd->cmd, "echo") && ft_argcmp(cmd->arg, "$_") && cmd->prev)
         lcmd = cmd->prev;
     else if (!ft_strcmp(cmd->cmd, "echo") && !ft_argcmp(cmd->arg, "$_"))

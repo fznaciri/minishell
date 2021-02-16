@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/05 11:24:34 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/15 16:43:22 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void    treat_line(char *line)
         else if (ft_is_empty(s[0]) && s[1])
             s = s + 1;
         path = get_path(s[0]);
-        path = ft_strtrim(path, " ");
+        // path = ft_strtrim(path, " ");
         path = ft_strremove(path, '\'');
         path = ft_strremove(path, '"');
         cmd = ft_cmd_new(path, s, op);

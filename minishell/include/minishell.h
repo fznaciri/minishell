@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 13:58:35 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/01/28 18:20:45 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:04:27 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,7 @@ int         ft_redcount(char *cmd, int l);
 //signal
 void sig_handler(int signum);
 
+
+char    *ft_putbackslash(char *s);
+int     count_backslash(char *str);
 #endif
