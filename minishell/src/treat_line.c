@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/20 12:34:38 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/20 16:34:10 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ char    *restruct_line(char *l)
             else
             {
                 v = extract(l + i + 1, "\"$= |@,']\\");
-                if (v)
+                if (v[0])
                 {
                     line = ft_strjoin(line, ft_getenv(v));
                     i += ft_strlen(v);

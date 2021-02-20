@@ -96,9 +96,22 @@
 int     is_seperator(char *s, int i, char *set)
 {
     int j;
+	int q;
+	int sq;
+
     j = 0;
+	q = 0;
+	sq = 0;
     while (set[j])
     {
+		if (s[i] == '\'' && !sq && !q)
+            sq = 1;
+        else if (s[i] == '\'' && sq )
+            sq = 0;
+        if (s[i] == '"' && !q && !sq)
+            q = 1;
+        else if (s[i] == '"' && q)
+            q = 0;
         if (set[j] == s[i] && (s[(i - 1 < 0 ? 1 : i - 1)] != '\\' || !SPECIAL(s[i])))
 			return 1;
         j++;
