@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 14:01:47 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/16 15:14:02 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:16:12 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void    set_lastcmd(t_cmd *cmd)
         lcmd = cmd;
     if (lcmd)
     {
+        // print_arg(lcmd->arg);
         n = arg_num(lcmd->arg);
         if (lcmd->prev && lcmd->prev->op && !ft_strcmp(lcmd->prev->op, "|"))
             s = ft_strjoin("_=", ft_strdup(""));

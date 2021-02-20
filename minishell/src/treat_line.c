@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 10:27:05 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/15 16:43:22 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:34:38 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    treat_line(char *line)
         red = treat_red(pipeline[i]); 
         op = opr(pipeline[i]);
         pipeline[i] =  remove_red(pipeline[i]);
-        s = ft_splitt(pipeline[i], "  \t");
+        s = ft_splitt(pipeline[i], " \t");
         if (op)
             s = remove_arg(s, op);
         // s = ft_argtrim(s, "\"'");
@@ -176,15 +176,18 @@ char    *restruct_line(char *l)
     int i;
     char *line;
     char *v;
+    int len;
     
     i = 0;
     line = NULL;
-    while(l[i])
+    len = ft_strlen(l);
+    while(i < len)
     {
-        if (l[i] == '\'' && l[i - 1 < 0 ? 1 : i - 1] != '\\')
+        if (l[i] && l[i] == '\'' && l[(i - 1 < 0 ? 1 : i - 1)] != '\\')
         {
+            line = ft_strappend(line, l[i]);
             i++;
-            while (l[i] != '\'')
+            while (l[i] && l[i] != '\'')
             {
                 line = ft_strappend(line, l[i]);
                 i++;
@@ -263,6 +266,8 @@ int     arg_num(char **arg)
     int i;
 
     i = 0;
+    if (!arg)
+        return 0;
     while (arg[i])
         i++;
     return (i);
@@ -285,7 +290,7 @@ void print_arg(char **arg)
     int i;
 
     i = 0;
-    while(arg[i])
+    while(arg[i] && arg)
     {
         printf("arg[%d] |%s|\n",i, arg[i]);
         i++;

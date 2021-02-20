@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 20:32:02 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/16 16:07:24 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:39:32 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,11 @@ void    wrap_exec(t_cmd **cmd)
     char **arg;
     char *tmp;
 
-    (*cmd)->cmd = restruct_line((*cmd)->cmd);
+    if ((*cmd)->cmd && !ft_is_empty((*cmd)->cmd))
+    {
+        (*cmd)->cmd = restruct_line((*cmd)->cmd);
+        (*cmd)->cmd = ft_strremove((*cmd)->cmd, '\\');
+    }
     arg = malloc((arg_num((*cmd)->arg) + 1) * sizeof(char*));
     i = 0;
     j = 0;
@@ -187,8 +191,8 @@ void    wrap_exec(t_cmd **cmd)
             if (arg[j])
             {
                 arg[j]= ft_putbackslash(arg[j]);
-                arg[j] = ft_strremove(arg[j], '"');
                 arg[j] = ft_strremove(arg[j], '\'');
+                arg[j] = ft_strremove(arg[j], '"');
                 arg[j] = ft_strremove(arg[j], '\\');
                 // printf("arg : %s\n", (*cmd)->arg[j]);
             }

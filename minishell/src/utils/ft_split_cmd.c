@@ -11,7 +11,7 @@
 // /* ************************************************************************** */
 
 // #include <stdlib.h>
-// #include "../../include/minishell.h"
+#include "../../include/minishell.h"
 
 // int		is_separator(char c)
 // {
@@ -93,9 +93,6 @@
 // 	return (words);
 // }
 
-#include "../../include/minishell.h"
-
-#include "../../include/minishell.h"
 int     is_seperator(char *s, int i, char *set)
 {
     int j;

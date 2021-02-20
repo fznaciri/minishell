@@ -6,7 +6,7 @@
 /*   By: fnaciri- <fnaciri-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 14:00:32 by fnaciri-          #+#    #+#             */
-/*   Updated: 2021/02/16 16:06:02 by fnaciri-         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:21:31 by fnaciri-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int     count_backslash(char *str)
     int i;
     int j;
     int sq;
+    
     sq = 0;
     i = ft_strlen(str) - 1;
     j = 0;
@@ -105,7 +106,7 @@ char    *ft_strremove(char *s, char c)
             new[i] = s[l];
             i++;
         }
-        if (c == '\\' && s[l] == c && (sq || (s[l - 1 > 0 ? l - 1 : 0] == '\\' && count_backslash(ft_strndup(s, l)) % 2 != 0))) // \"hi\"
+        if (c == '\\' && s[l] == c && (sq || (s[l - 1 > 0 ? l - 1 : 0] == '\\' && count_backslash(ft_strndup(s, l)) % 2 != 0)))
         {
             new[i] = s[l];
             i++;
